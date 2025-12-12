@@ -798,3 +798,5 @@ details.group>div:where(.dark, .dark *) {
     background-image: none !important;
     color: rgba(255, 255, 255, 0.7) !important;
 }
+
+/* Force HMR Rebuild */
