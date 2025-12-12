@@ -1,16 +1,16 @@
 ---
-
+const { inverse = false } = Astro.props as { inverse?: boolean };
 ---
 
 <button
     id="theme-toggle"
     type="button"
-    class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 w-10 h-10 flex items-center justify-center transition-all duration-300"
+    class={`${inverse ? "text-white hover:bg-white/10 dark:text-gray-400 dark:hover:bg-gray-700" : "text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700"} focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 w-10 h-10 flex items-center justify-center transition-all duration-300`}
     aria-label="Toggle Dark Mode"
 >
     <svg
         id="theme-toggle-dark-icon"
-        class="hidden w-5 h-5"
+        class="hidden w-5 h-5 text-orange-600 hover:text-orange-700 transition-colors"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@
     </svg>
     <svg
         id="theme-toggle-light-icon"
-        class="hidden w-5 h-5"
+        class="hidden w-5 h-5 text-yellow-400 hover:text-yellow-300 transition-colors"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"

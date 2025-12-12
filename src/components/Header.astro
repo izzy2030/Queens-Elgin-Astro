@@ -2,7 +2,10 @@
 import ThemeToggle from "./ThemeToggle.astro";
 import type { BrandConfig } from "../brands";
 
-const { brand } = Astro.props as { brand: BrandConfig };
+const { brand, inverse = false } = Astro.props as {
+  brand: BrandConfig;
+  inverse?: boolean;
+};
 
 const nameParts = brand.name.split(" ");
 const firstName = nameParts[0];
@@ -14,11 +17,19 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 >
   <header
     id="main-nav"
-    class="pointer-events-auto relative tracking-tight flex items-center justify-between w-full transition-all duration-500
-    /* Mobile Styles: Full width, clean, no pill */
+    class={`pointer-events-auto relative tracking-tight flex items-center justify-between w-full transition-all duration-500
+    /* Mobile Styles */
     px-6 py-4 bg-white/0 dark:bg-slate-900/0 border-b border-transparent
-    /* Desktop Styles: Floating Pill, Animated */
-    md:bg-white/90 md:backdrop-blur-md md:dark:bg-slate-900/90 md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-gray-100 md:dark:border-gray-800 md:max-w-6xl md:opacity-0 md:scale-[0.8]"
+    /* Desktop Styles */
+    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-gray-100 md:dark:border-gray-800 md:max-w-6xl md:opacity-0 md:scale-[0.8]
+    ${brand.logoPathWhite || "text-white"} 
+    ${
+      // If inverse (transparent on dark), remove desktop white bg/blur default, apply specifically if needed or keep transparent
+      // Actually, for Arvora style, the desktop header might still want to be a "pill" or transparent?
+      // User asked about "mobile hamburger menu".
+      // Let's keep desktop behavior mostly same but allow text override.
+      "md:bg-white/90 md:backdrop-blur-md md:dark:bg-slate-900/90"
+    }`}
   >
     <!-- Logo -->
     <a
@@ -28,11 +39,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       {
         brand.logoPath && brand.logoPath.includes("New-Logo") ? (
           <>
+            {/* Standard Logo - Shown in Light Mode */}
             <img
               src={brand.logoPath}
               alt={brand.name}
-              class={`h-8 w-auto object-contain ${brand.logoPathWhite ? "dark:hidden" : ""}`}
+              class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
             />
+            {/* White/Dark Mode Logo - Shown in Dark Mode */}
             {brand.logoPathWhite && (
               <img
                 src={brand.logoPathWhite}
@@ -42,9 +55,13 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
             )}
           </>
         ) : (
-          <span class="text-xl font-bold tracking-tighter uppercase text-queens-primary dark:text-white group-hover:text-queens-secondary transition-colors duration-300">
+          <span
+            class={`text-xl font-bold tracking-tighter uppercase group-hover:text-queens-secondary transition-colors duration-300 ${inverse ? "text-white" : "text-queens-primary dark:text-white"}`}
+          >
             {firstName}{" "}
-            <span class="text-queens-secondary group-hover:text-queens-primary transition-colors duration-300">
+            <span
+              class={`group-hover:text-queens-primary transition-colors duration-300 ${inverse ? "text-queens-secondary" : "text-queens-secondary"}`}
+            >
               {secondName}
             </span>
           </span>
@@ -57,38 +74,38 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       <a
         href={`/`}
         data-astro-prefetch="hover"
-        class="text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-gray-600 dark:text-gray-300"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
         >Home</a
       >
       <a
         href={`/services`}
         data-astro-prefetch="hover"
-        class="text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-gray-600 dark:text-gray-300"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
         >Services</a
       >
       <a
         href={`/buy-new-tires`}
         data-astro-reload
-        class="text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-gray-600 dark:text-gray-300"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
         >New Tires</a
       >
       <a
         href={`/deals`}
         data-astro-prefetch="hover"
-        class="text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-gray-600 dark:text-gray-300"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
         >Deals</a
       >
       <a
         href={`/contact`}
         data-astro-prefetch="hover"
-        class="text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all text-gray-600 dark:text-gray-300"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-slate-800 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
         >Contact</a
       >
     </nav>
 
     <!-- Right Side Actions -->
     <div class="flex items-center gap-3 ml-auto md:ml-0 pl-0 md:pl-0">
-      <ThemeToggle />
+      <ThemeToggle inverse={inverse} />
 
       <a
         href={`/request-an-appointment`}
@@ -100,7 +117,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-button"
-        class="md:hidden text-queens-primary hover:text-queens-secondary dark:text-white dark:hover:text-queens-secondary p-1"
+        class={`md:hidden p-1 ${inverse ? "text-white hover:text-queens-secondary" : "text-queens-primary hover:text-queens-secondary dark:text-white dark:hover:text-queens-secondary"}`}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
