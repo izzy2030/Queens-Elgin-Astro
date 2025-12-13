@@ -16,57 +16,39 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
   class="absolute top-0 left-0 right-0 z-50 flex justify-center md:pt-6 md:px-4 pointer-events-none"
 >
   <header
-    id="main-nav"
+    id="main-nav-services"
     class={`pointer-events-auto relative tracking-tight flex items-center justify-between w-full transition-all duration-500
     /* Mobile Styles */
-    px-6 py-4 bg-white/0 dark:bg-slate-900/0 border-b border-transparent
+    px-6 py-4 bg-black/60 backdrop-blur-md border-b border-white/10
     /* Desktop Styles */
-    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-white/20 md:dark:border-white/10 md:max-w-6xl
-    ${brand.logoPathWhite || "text-white"} 
-    ${
-      // If inverse (transparent on dark), remove desktop white bg/blur default, apply specifically if needed or keep transparent
-      // Actually, for Arvora style, the desktop header might still want to be a "pill" or transparent?
-      // User asked about "mobile hamburger menu".
-      // Let's keep desktop behavior mostly same but allow text override.
-      "md:bg-white md:dark:bg-queens-dark md:shadow-sm md:border md:border-gray-100 md:dark:border-gray-800 transition-colors duration-300"
-    }`}
+    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.3)] md:border md:border-white/10 md:max-w-6xl
+    text-white 
+    md:bg-black/60 md:backdrop-blur-md transition-colors duration-300`}
   >
     <!-- Logo -->
     <a
       href={`/`}
       class="group flex items-center gap-2 mr-auto md:mr-8 shrink-0"
     >
-      {
-        brand.logoPath && brand.logoPath.includes("New-Logo") ? (
-          <>
-            {/* Standard Logo - Shown in Light Mode */}
-            <img
-              src={brand.logoPath}
-              alt={brand.name}
-              class={`h-8 w-auto object-contain block ${brand.logoPathWhite ? "dark:hidden" : ""}`}
-            />
-            {/* White/Dark Mode Logo - Shown in Dark Mode */}
-            {brand.logoPathWhite && (
-              <img
-                src={brand.logoPathWhite}
-                alt={brand.name}
-                class="h-8 w-auto object-contain hidden dark:block"
-              />
-            )}
-          </>
-        ) : (
+      {/* Force White Logo for Dark Header */}
+      {brand.logoPathWhite ? (
+        <img
+          src={brand.logoPathWhite}
+          alt={brand.name}
+          class="h-8 w-auto object-contain block"
+        />
+      ) : (
+        <span
+          class="text-xl font-bold tracking-tighter uppercase text-white group-hover:text-queens-secondary transition-colors duration-300"
+        >
+          {firstName}{" "}
           <span
-            class={`text-xl font-bold tracking-tighter uppercase group-hover:text-queens-secondary transition-colors duration-300 ${inverse ? "text-white" : "text-queens-primary dark:text-white"}`}
+            class="text-queens-secondary group-hover:text-white transition-colors duration-300"
           >
-            {firstName}{" "}
-            <span
-              class={`group-hover:text-queens-primary transition-colors duration-300 ${inverse ? "text-queens-secondary" : "text-queens-secondary"}`}
-            >
-              {secondName}
-            </span>
+            {secondName}
           </span>
-        )
-      }
+        </span>
+      )}
     </a>
 
     <!-- Desktop Navigation -->
@@ -74,50 +56,50 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       <a
         href={`/`}
         data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-white/10 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
+        class="text-sm font-medium text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
         >Home</a
       >
       <a
         href={`/services`}
         data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-white/10 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
+        class="text-sm font-medium text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
         >Services</a
       >
       <a
         href={`/buy-new-tires`}
         data-astro-reload
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-white/10 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
+        class="text-sm font-medium text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
         >New Tires</a
       >
       <a
         href={`/deals`}
         data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-white/10 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
+        class="text-sm font-medium text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
         >Deals</a
       >
       <a
         href={`/contact`}
         data-astro-prefetch="hover"
-        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full hover:bg-gray-50 dark:hover:bg-white/10 transition-all ${inverse ? "text-white/90 hover:text-white hover:bg-white/10" : "text-gray-600 dark:text-gray-300"}`}
+        class="text-sm font-medium text-white/90 hover:text-white px-4 py-2 rounded-full hover:bg-white/10 transition-all border border-transparent hover:border-white/20"
         >Contact</a
       >
     </nav>
 
     <!-- Right Side Actions -->
     <div class="flex items-center gap-3 ml-auto md:ml-0 pl-0 md:pl-0">
-      <ThemeToggle inverse={inverse} />
+      <ThemeToggle inverse={true} />
 
       <a
         href={`/request-an-appointment`}
-        class="hidden md:inline-flex items-center justify-center bg-queens-primary hover:bg-queens-secondary text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+        class="hidden md:inline-flex items-center justify-center bg-queens-primary hover:bg-queens-secondary text-white text-sm font-bold px-6 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5 border border-white/20"
       >
         Book Appointment
       </a>
 
       <!-- Mobile Menu Button -->
       <button
-        id="mobile-menu-button"
-        class={`md:hidden p-1 ${inverse ? "text-white hover:text-queens-secondary" : "text-queens-primary hover:text-queens-secondary dark:text-white dark:hover:text-queens-secondary"}`}
+        id="mobile-menu-button-services"
+        class="md:hidden p-1 text-white hover:text-queens-secondary"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -138,10 +120,10 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 </div>
 
 <!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 z-[100] hidden md:hidden">
+<div id="mobile-menu-services" class="fixed inset-0 z-[100] hidden md:hidden">
   <!-- Backdrop -->
   <div
-    id="mobile-menu-backdrop"
+    id="mobile-menu-backdrop-services"
     class="absolute inset-0 bg-black/20 backdrop-blur-sm"
   >
   </div>
@@ -157,7 +139,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         >Menu</span
       >
       <button
-        id="mobile-menu-close"
+        id="mobile-menu-close-services"
         class="p-2 -mr-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
       >
         <svg
@@ -222,12 +204,12 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 </div>
 
 <script>
-  function setupHeader() {
-    const nav = document.getElementById("main-nav");
-    const mobileMenuButton = document.getElementById("mobile-menu-button");
-    const mobileMenu = document.getElementById("mobile-menu");
-    const mobileMenuClose = document.getElementById("mobile-menu-close");
-    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
+  function setupHeaderServices() {
+    const nav = document.getElementById("main-nav-services");
+    const mobileMenuButton = document.getElementById("mobile-menu-button-services");
+    const mobileMenu = document.getElementById("mobile-menu-services");
+    const mobileMenuClose = document.getElementById("mobile-menu-close-services");
+    const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop-services");
 
     if (!nav) return;
 
@@ -258,13 +240,6 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     }
     // Mobile: no animation needed, navbar stays at default scale
 
-    // Scroll Logic Removed for Static Header
-    /* 
-    const updateHeaderStyle = () => {
-       // ... Logic removed to keep header static/absolute ...
-    }; 
-    */
-
     if (!mobileMenuButton || !mobileMenu) return;
 
     const openMobileMenu = () => {
@@ -286,33 +261,27 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       link.addEventListener("click", closeMobileMenu);
     });
 
-    // window.addEventListener("scroll", updateHeaderStyle);
-
     // Clean up on page swap
     document.addEventListener(
       "astro:before-swap",
       () => {
         closeMobileMenu();
-        // window.removeEventListener("scroll", updateHeaderStyle);
       },
       { once: true },
     );
-
-    // Initial check
-    // updateHeaderStyle();
   }
 
   // Run on initial load
-  setupHeader();
+  setupHeaderServices();
 
   // Run on view transitions
-  document.addEventListener("astro:page-load", setupHeader);
+  document.addEventListener("astro:page-load", setupHeaderServices);
 </script>
 
 <style>
   /* Desktop: Start navbar at 80% scale - JS will animate to 100% */
   @media (min-width: 768px) {
-    #main-nav {
+    #main-nav-services {
       transform: scale(0.8);
     }
   }

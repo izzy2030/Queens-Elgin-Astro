@@ -16,7 +16,7 @@ const description = category.description;
 ---
 
 <BaseLayout brand={mobileTiresBrand} title={title}>
-    <div class="bg-gray-50 dark:bg-slate-900 py-24 sm:py-32">
+    <div class="py-24 sm:py-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
                 <p
@@ -42,7 +42,7 @@ const description = category.description;
                     category.services.map((service) => (
                         <a
                             href={`/services/${category.slug}/${service.slug}/`}
-                            class="flex flex-col gap-y-4 rounded-2xl bg-white dark:bg-slate-800 p-6 shadow-lg hover:shadow-xl transition-shadow ring-1 ring-gray-200 dark:ring-gray-700"
+                            class="flex flex-col gap-y-4 rounded-2xl bg-white dark:bg-white/5 p-6 shadow-lg hover:shadow-xl transition-shadow ring-1 ring-gray-200 dark:ring-white/10"
                         >
                             <h3 class="text-xl font-semibold leading-7 tracking-tight text-gray-900 dark:text-white">
                                 {service.title}

@@ -8,11 +8,11 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
 <!-- NOTE: Extra top padding to account for floating header -->
 <section
-  class="relative pt-36 pb-24 sm:pt-48 sm:pb-32 bg-white overflow-hidden"
+  class="relative pt-36 pb-24 sm:pt-48 sm:pb-32 overflow-hidden"
 >
-  <!-- Background Glow Effect (Subtle) -->
+  <!-- Background Glow Effect (Subtle) - Hidden in dark mode -->
   <div
-    class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none z-0"
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none z-0 dark:opacity-0"
   >
     <div
       class="absolute top-[20%] left-[10%] w-96 h-96 bg-[var(--color-queens-secondary)]/10 rounded-full blur-3xl mix-blend-multiply filter opacity-70 animate-blob"
@@ -39,7 +39,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
     <!-- Headline -->
     <h1
-      class="text-5xl md:text-7xl font-sans font-normal tracking-tighter text-[var(--color-queens-primary)] mb-8 leading-[1.1]"
+      class="text-5xl md:text-7xl font-sans font-normal tracking-tighter text-[var(--color-queens-primary)] dark:text-white mb-8 leading-[1.1]"
     >
       We Bring The <br />
       <span class="font-serif italic text-queens-secondary">Tire Shop</span> To You
@@ -47,7 +47,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
     <!-- Subheadline -->
     <p
-      class="text-xl md:text-2xl text-[var(--color-queens-primary)]/60 mb-12 max-w-2xl mx-auto leading-relaxed font-sans font-light"
+      class="text-xl md:text-2xl text-[var(--color-queens-primary)]/60 dark:text-gray-400 mb-12 max-w-2xl mx-auto leading-relaxed font-sans font-light"
     >
       Skip the waiting room. We deliver and install your new tires at home or
       work.
@@ -80,7 +80,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
 
         <!-- Inner Card (Glassmorphic) -->
         <div
-          class="relative z-10 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-[14px] p-5 flex items-center gap-5 shadow-xl"
+          class="relative z-10 bg-white/95 dark:bg-queens-dark/95 backdrop-blur-xl rounded-[14px] p-5 flex items-center gap-5 shadow-xl"
         >
           <audio
             x-ref="audioPlayer"

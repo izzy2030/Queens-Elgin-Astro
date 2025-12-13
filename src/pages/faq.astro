@@ -131,12 +131,12 @@ const faqSchema = {
   </section>
 
   <!-- FAQ Accordion Section -->
-  <section class="py-20 lg:py-28 bg-white dark:bg-slate-900">
+  <section class="py-20 lg:py-28">
     <div class="container mx-auto px-6 max-w-4xl">
       <div class="space-y-4" id="faq-accordion">
         {
           faqs.map((faq, index) => (
-            <details class="group faq-details rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:!bg-transparent dark:!bg-none shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden dark:shadow-none">
+            <details class="group faq-details rounded-2xl border border-gray-200 dark:border-white/10 bg-white dark:bg-white/5 shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden dark:shadow-none">
               <summary class="flex items-center justify-between gap-4 p-6 lg:p-8 text-left cursor-pointer list-none focus:outline-none hover:bg-gray-50 dark:hover:bg-white/5 transition-colors dark:!bg-transparent dark:!bg-none">
                 <span class="flex items-center gap-4">
                   <span class="flex-shrink-0 w-10 h-10 rounded-xl bg-queens-secondary/10 text-queens-secondary font-bold flex items-center justify-center text-sm">
@@ -182,7 +182,7 @@ const faqSchema = {
   </section>
 
   <!-- CTA Section -->
-  <section class="py-20 lg:py-28 bg-gray-50 dark:bg-slate-900/50">
+  <section class="py-20 lg:py-28">
     <div class="container mx-auto px-6 max-w-4xl text-center">
       <h2
         class="text-3xl md:text-4xl font-bold text-queens-primary dark:text-white mb-6"

@@ -10,7 +10,7 @@ export default {
           DEFAULT: '#0a79c8', // Brand Blue (Secondary)
           primary: '#0b1121', // Dark Navy (Primary)
           secondary: '#0a79c8', // Brand Blue
-          dark: '#080c17',    // Darker shade of primary
+          dark: '#040613',    // Darker shade of primary
           light: '#1489e1',   // Lighter shade of secondary
           white: '#ffffff',
           gray: '#f4f4f4',
