@@ -10,14 +10,20 @@ const { inverse = false } = Astro.props as { inverse?: boolean };
 >
     <svg
         id="theme-toggle-dark-icon"
-        class="hidden w-5 h-5 text-orange-600 hover:text-orange-700 transition-colors"
-        fill="currentColor"
+        class="hidden w-5 h-5"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
     >
-        <path
-            d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"
-        ></path>
+        <defs>
+            <!-- Full Moon Gradient: Bright center (offset slightly for 3D) fading to dark edge -->
+            <radialGradient id="moon-gradient-custom" gradientUnits="userSpaceOnUse" cx="8" cy="8" r="12">
+                <stop offset="0%" stop-color="#fef08a"></stop> <!-- Yellow Highlight -->
+                <stop offset="40%" stop-color="#f97316"></stop> <!-- Orange Body -->
+                <stop offset="100%" stop-color="#7f1d1d"></stop> <!-- Deep Red Edge -->
+            </radialGradient>
+        </defs>
+        <!-- Full Moon Circle -->
+        <circle cx="10" cy="10" r="9" fill="url(#moon-gradient-custom)"></circle>
     </svg>
     <svg
         id="theme-toggle-light-icon"

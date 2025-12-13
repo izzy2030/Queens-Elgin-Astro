@@ -21,14 +21,14 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     /* Mobile Styles */
     px-6 py-4 bg-white/0 dark:bg-slate-900/0 border-b border-transparent
     /* Desktop Styles */
-    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-gray-100 md:dark:border-gray-800 md:max-w-6xl
+    md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-white/20 md:dark:border-white/10 md:max-w-6xl
     ${brand.logoPathWhite || "text-white"} 
     ${
       // If inverse (transparent on dark), remove desktop white bg/blur default, apply specifically if needed or keep transparent
       // Actually, for Arvora style, the desktop header might still want to be a "pill" or transparent?
       // User asked about "mobile hamburger menu".
       // Let's keep desktop behavior mostly same but allow text override.
-      "md:bg-white/90 md:backdrop-blur-md md:dark:bg-slate-900/90"
+      "md:bg-transparent md:backdrop-blur-lg md:dark:bg-slate-900/20 transition-colors duration-300"
     }`}
   >
     <!-- Logo -->
