@@ -793,6 +793,76 @@ details.group>div:where(.dark, .dark *) {
 
 /* Force HMR Rebuild */
 
+
+/* ========================================
+   SERVICE CARD THEMES (ALTERNATING)
+   Alternates card styles for visual interest
+   ======================================== */
+
+.service-card-section {
+    background-color: #f9fafc;
+}
+
+.dark .service-card-section {
+    background-color: var(--bg-page);
+}
+
+.service-card-item {
+    transition: all 0.3s ease;
+}
+
+/* ODD CARDS: White (Light Mode) / Dark Glass (Dark Mode) */
+.service-card-item:nth-child(odd) {
+    background-color: #ffffff;
+    border: 1px solid var(--border-default);
+}
+
+.dark .service-card-item:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* EVEN CARDS: Navy Accent (Light & Dark Mode) */
+.service-card-item:nth-child(even) {
+    background-color: #171f32 !important;
+    color: white !important;
+    border: 1px solid #171f32;
+}
+
+.dark .service-card-item:nth-child(even) {
+    /* In dark mode, keep the navy card but ensure it stands out or blends correctly */
+    background-color: #171f32 !important; /* Slightly lighter than page bg #040613 */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Text Overrides for Navy Cards */
+.service-card-item:nth-child(even) h2,
+.service-card-item:nth-child(even) h3,
+.service-card-item:nth-child(even) p,
+.service-card-item:nth-child(even) li,
+.service-card-item:nth-child(even) span {
+    color: white !important;
+}
+
+.service-card-item:nth-child(even) a {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.service-card-item:nth-child(even) a:hover {
+    color: white !important;
+    text-decoration: underline;
+}
+
+/* Adjust beam effect for Navy Cards (Make it clearer/white) */
+.service-card-item:nth-child(even) .glow-beam-sm {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.service-card-item:nth-child(even) .glow-beam-sm::before {
+    background: linear-gradient(to right, rgba(255,255,255,0.1), white);
+}
+
+
 /* ========================================
    GLOBAL ANIMATIONS
    ======================================== */
@@ -856,6 +926,17 @@ details.group>div:where(.dark, .dark *) {
 
 [data-reveal-item].reveal-item-animate {
     animation: revealSlideUp 1.2s ease-in-out forwards;
+}
+
+/* ========================================
+   IMAGE REVEAL UTILITY
+   Custom transition for clip-path reveals
+   ======================================== */
+.image-reveal-transition {
+    transition-property: clip-path;
+    transition-duration: 1500ms;
+    transition-timing-function: cubic-bezier(0.85, 0, 0.15, 1);
+    will-change: clip-path;
 }
 
 /* ========================================

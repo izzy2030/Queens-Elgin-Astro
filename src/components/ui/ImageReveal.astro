@@ -23,7 +23,23 @@ const {
 const wrapperClass =
     `image-reveal-wrapper group relative overflow-hidden block ${aspectRatio} ${classStr} ${className}`.trim();
 
-// Set data attribute for direction so JS can read it
+// Calculate initial clip-path based on direction
+let initialClipPath = "inset(0 100% 0 0)"; // Default: right (reveals left to right)
+
+switch (direction) {
+    case "left":
+        initialClipPath = "inset(0 0 0 100%)";
+        break;
+    case "right":
+        initialClipPath = "inset(0 100% 0 0)";
+        break;
+    case "top":
+        initialClipPath = "inset(100% 0 0 0)";
+        break;
+    case "bottom":
+        initialClipPath = "inset(0 0 100% 0)";
+        break;
+}
 ---
 
 <div class={wrapperClass} data-image-reveal data-reveal-direction={direction}>
@@ -31,8 +47,8 @@ const wrapperClass =
         src={src}
         alt={alt}
         loading={loading}
-        class="reveal-image block w-full h-full object-cover transition-[clip-path] duration-[1200ms] ease-[cubic-bezier(0.25,1,0.5,1)] will-change-[clip-path]"
-        style="clip-path: inset(0 100% 0 0);"
+        class="reveal-image block w-full h-full object-cover image-reveal-transition"
+        style={`clip-path: ${initialClipPath};`}
     />
 </div>
 

@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import { mobileTiresBrand } from "../../brands";
 import servicesData from "../../data/services.json";
 import SmoothReveal from "../../components/SmoothReveal.astro";
+import ImageReveal from "../../components/ui/ImageReveal.astro";
 
 const title = "One-Stop Shop for Auto Repair | Queens Mobile Tires";
 const description =
@@ -18,9 +19,7 @@ const description =
                 <div data-reveal-item>
                     <!-- Recommended heading size for internal page heroes -->
                     <h3 class="text-gray-900 dark:text-white mb-6">
-                        Your <span class="bg-[#0e79c9] text-white px-2 rounded"
-                            >One-Stop Shop</span
-                        > For All Your Auto Repair Needs
+                        Your One-Stop Shop For All Your Auto Repair Needs
                     </h3>
                     <p
                         class="paragraph-1 text-gray-600 dark:text-gray-300 mb-6"
@@ -36,13 +35,15 @@ const description =
                     </p>
                 </div>
                 <div
-                    class="relative rounded-2xl overflow-hidden shadow-2xl"
+                    class="relative rounded-2xl overflow-hidden"
                     data-reveal-item
                 >
-                    <img
+                    <ImageReveal
                         src="/images/shop/Queens-Auto-Services-Elgin-Front-View-Shop-001.webp"
                         alt="Queens Auto Services Shop Front"
-                        class="w-full h-full object-cover"
+                        direction="bottom"
+                        loading="eager"
+                        className="w-full h-full"
                     />
                 </div>
             </div>
@@ -50,7 +51,7 @@ const description =
     </div>
 
     <!-- Services Grid -->
-    <div class="pb-24 sm:pb-32" data-reveal>
+    <div class="service-card-section py-24 sm:py-32 -mx-4 px-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 xl:-mx-[calc((100vw-80rem)/2)] xl:px-[calc((100vw-80rem)/2)]" data-reveal>
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div
                 class="mx-auto grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2 lg:max-w-none lg:grid-cols-3"
@@ -58,7 +59,7 @@ const description =
                 {
                     servicesData.map((category, index) => (
                         <div
-                            class="rich-text glow-beam-hover flex flex-col rounded-3xl bg-gray-100 dark:bg-slate-800/50 p-8 shadow-xl dark:shadow-black/20 border border-gray-200 dark:border-white/10 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
+                            class="service-card-item rich-text glow-beam-hover flex flex-col rounded-3xl p-8 shadow-xl dark:shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
                         >
                             <h2 class="text-gray-900 dark:text-white">{category.title}</h2>
                             
