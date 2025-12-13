@@ -89,14 +89,20 @@ const deals = [
                     class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3"
                 >
                     {
-                        deals.map((deal) => (
-                            <div class="flex flex-col bg-white dark:bg-white/5 rounded-lg p-8 border border-gray-200 dark:border-white/10 shadow-md text-center h-full">
-                                <h3 class="text-gray-900 dark:text-white mb-1">
+                        deals.map((deal, index) => (
+                            <div class="rich-text glow-beam-hover flex flex-col rounded-3xl bg-gray-100 dark:bg-slate-800/50 p-8 shadow-xl dark:shadow-black/20 border border-gray-200 dark:border-white/10 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] text-center h-full">
+                                <h2 class="text-gray-900 dark:text-white !mb-0">
                                     {deal.title}
-                                </h3>
-                                <h4 class="text-gray-800 dark:text-gray-200 underline underline-offset-4 decoration-2 decoration-gray-400 dark:decoration-gray-500 mb-6">
+                                </h2>
+                                <h3 class="text-gray-600 dark:text-gray-300 !mt-1 !mb-2">
                                     {deal.subtitle}
-                                </h4>
+                                </h3>
+                                
+                                <!-- Glowing Beam Effect -->
+                                <div class="relative w-full h-5 mb-4 flex justify-center">
+                                    <div class="glow-beam-sm"></div>
+                                </div>
+                                
                                 <p class="paragraph-2 text-gray-600 dark:text-gray-300 flex-grow mb-6">
                                     {deal.description}
                                 </p>
@@ -106,7 +112,7 @@ const deals = [
                                 <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-auto">
                                     <a
                                         href={deal.link}
-                                        class="inline-block w-full rounded-md bg-[#0070bc] hover:bg-[#005a9c] px-6 py-3 text-center text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0070bc] transition-colors"
+                                        class="inline-block w-full rounded-full bg-queens-secondary hover:bg-queens-light px-6 py-3 text-center text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all duration-300"
                                     >
                                         {deal.cta}
                                     </a>
