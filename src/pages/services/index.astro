@@ -58,15 +58,21 @@ const description =
                 {
                     servicesData.map((category, index) => (
                         <div
-                            class="flex flex-col rounded-2xl bg-[#1F2937] p-8 shadow-sm hover:shadow-lg transition-shadow border border-gray-700"
+                            class="rich-text glow-beam-hover flex flex-col rounded-3xl bg-gray-100 dark:bg-slate-800/50 p-8 shadow-xl dark:shadow-black/20 border border-gray-200 dark:border-white/10 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02]"
                         >
-                            <h6 class="text-white mb-6">{category.title}</h6>
+                            <h2 class="text-gray-900 dark:text-white">{category.title}</h2>
+                            
+                            <!-- Glowing Beam Effect (uses global .glow-beam-sm class) -->
+                            <div class="relative w-full h-5 mb-4">
+                                <div class="glow-beam-sm"></div>
+                            </div>
+                            
                             <ul class="flex-1 space-y-2">
                                 {category.services.map((service) => (
                                     <li>
                                         <a
                                             href={`/services/${category.slug}/${service.slug}/`}
-                                            class="text-white opacity-80 hover:text-queens-secondary hover:opacity-100 hover:underline transition-all text-sm"
+                                            class="text-gray-600 dark:text-white/80 hover:text-queens-secondary dark:hover:text-queens-secondary hover:underline transition-all text-sm"
                                         >
                                             {service.title}
                                         </a>
