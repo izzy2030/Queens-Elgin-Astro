@@ -5,7 +5,7 @@ import { mobileTiresBrand } from "../brands";
 const { brand = mobileTiresBrand } = Astro.props;
 ---
 
-<section class="py-24 bg-white dark:bg-queens-dark overflow-hidden">
+<section class="py-24 overflow-hidden">
     <div class="container mx-auto px-6 max-w-7xl">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <!-- Left Content -->
@@ -57,7 +57,7 @@ const { brand = mobileTiresBrand } = Astro.props;
                     src="/images/mobile-tire-installation-highway.webp"
                     alt="Queens Mobile Tire Installation Van"
                     class="rounded-3xl shadow-2xl aspect-[4/5] object-cover"
-                    position="right"
+                    direction="right"
                 />
             </div>
         </div>

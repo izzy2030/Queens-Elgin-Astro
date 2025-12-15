@@ -24,8 +24,10 @@ const brand: BrandConfig = propBrand || mobileTiresBrand;
 const currentPath = Astro.url.pathname;
 // Check if we are on a service SUB-PAGE (e.g. /services/brakes)
 // We want to exclude the main archive page (/services) which needs the white header.
-const isServicesArchive = currentPath === '/services' || currentPath === '/services/';
-const isServiceSubPage = currentPath.startsWith('/services') && !isServicesArchive;
+const isServicesArchive =
+  currentPath === "/services" || currentPath === "/services/";
+const isServiceSubPage =
+  currentPath.startsWith("/services") && !isServicesArchive;
 ---
 
 <!doctype html>
@@ -69,16 +71,18 @@ const isServiceSubPage = currentPath.startsWith('/services') && !isServicesArchi
     <slot name="head" />
   </head>
   <body
-    class="bg-white text-queens-primary flex flex-col min-h-screen w-full overflow-x-hidden dark:bg-queens-dark dark:text-gray-100"
+    class="bg-page text-queens-primary flex flex-col min-h-screen w-full overflow-x-hidden dark:text-gray-100"
   >
     <a href="#main-content" class="skip-to-content-link">Skip to main content</a
     >
-    
-    {isServiceSubPage ? (
-      <ServicesHeader brand={brand} inverse={headerInverse} />
-    ) : (
-      <Header brand={brand} inverse={headerInverse} />
-    )}
+
+    {
+      isServiceSubPage ? (
+        <ServicesHeader brand={brand} inverse={headerInverse} />
+      ) : (
+        <Header brand={brand} inverse={headerInverse} />
+      )
+    }
 
     <main id="main-content" class="flex-grow">
       <slot />
