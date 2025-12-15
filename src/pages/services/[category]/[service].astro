@@ -4,6 +4,7 @@ import { mobileTiresBrand } from "../../../brands";
 import servicesData from "../../../data/services.json";
 import SmoothReveal from "../../../components/SmoothReveal.astro";
 import CtaButtonSecondary from "../../../components/CtaButtonSecondary.astro";
+import SpeedometerCTA from "../../../components/SpeedometerCTA.astro";
 
 export async function getStaticPaths() {
     const paths: any[] = [];
@@ -507,36 +508,8 @@ const description = `Professional ${service.title} services in the Chicago area.
     </div>
 
     <!-- CTA Section with CSS-Only Scroll Reveal (Kevin Powell technique) -->
-    <section
-        class="scroll-reveal bg-[#f5f5f5] dark:bg-none dark:bg-transparent py-24 sm:py-32"
-    >
-        <div class="mx-auto max-w-4xl px-6 lg:px-8 text-center">
-            <!-- Scroll Reveal Heading -->
-            <h2 class="font-bold tracking-tight mb-8">
-                <span>Expert Auto Care </span><em class="font-serif"
-                    ><span>for Your Vehicle</span></em
-                >
-            </h2>
-
-            <!-- Scroll Reveal Description -->
-            <p class="text-lg leading-8 max-w-2xl mx-auto mb-10">
-                <span
-                    >Ready to experience professional auto service? Schedule
-                    your appointment today and let our certified technicians
-                    take care of your vehicle.</span
-                >
-            </p>
-
-            <!-- CTA Button -->
-            <div class="cta-button-reveal">
-                <CtaButtonSecondary 
-                    href="/request-an-appointment/" 
-                    text="Schedule Service" 
-                    class="px-8 py-4 text-lg"
-                />
-            </div>
-        </div>
-    </section>
+    <!-- CTA Section with Speedometer Visual -->
+    <SpeedometerCTA />
 
     <!-- Include the SmoothReveal animation system -->
     <SmoothReveal />
@@ -612,8 +585,8 @@ const description = `Professional ${service.title} services in the Chicago area.
         /* CSS-Only Scroll Reveal Theme Variables */
         .scroll-reveal {
             /* Light Mode Default */
-            --reveal-text-dim: hsl(0 0% 50% / 0.25);    /* Faint Gray */
-            --reveal-text-bright: #111827;              /* Deep Black */
+            --reveal-text-dim: hsl(0 0% 50% / 0.25); /* Faint Gray */
+            --reveal-text-bright: #111827; /* Deep Black */
         }
 
         /* 
@@ -622,8 +595,10 @@ const description = `Professional ${service.title} services in the Chicago area.
         */
         :global(.dark) .scroll-reveal {
             /* Dark Mode Inverse */
-            --reveal-text-dim: hsl(0 0% 100% / 0.4);    /* Soft White/Gray (Increased visibility) */
-            --reveal-text-bright: #ffffff;              /* Pure White */
+            --reveal-text-dim: hsl(
+                0 0% 100% / 0.4
+            ); /* Soft White/Gray (Increased visibility) */
+            --reveal-text-bright: #ffffff; /* Pure White */
         }
 
         /* Scroll Reveal Effect */
@@ -632,7 +607,11 @@ const description = `Professional ${service.title} services in the Chicago area.
             color: var(--reveal-text-dim);
 
             /* Revealed state (Bright) applied via background gradient */
-            background-image: linear-gradient(90deg, var(--reveal-text-bright), var(--reveal-text-bright));
+            background-image: linear-gradient(
+                90deg,
+                var(--reveal-text-bright),
+                var(--reveal-text-bright)
+            );
 
             /* Clip background to text shape */
             background-clip: text;
