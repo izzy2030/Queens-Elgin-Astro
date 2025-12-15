@@ -162,7 +162,7 @@ import CtaButtonSecondary from "./CtaButtonSecondary.astro";
 
         function calculateSpeed() {
             // Get the current stroke-dashoffset
-            const style = window.getComputedStyle(meterBar);
+            const style = window.getComputedStyle(meterBar!);
             const strokeDashoffset = parseFloat(
                 style.getPropertyValue("stroke-dashoffset"),
             );
@@ -183,7 +183,7 @@ import CtaButtonSecondary from "./CtaButtonSecondary.astro";
 
         function updateSpeedDisplay() {
             const speed = calculateSpeed();
-            speedDisplay.textContent = speed.toString();
+            speedDisplay!.textContent = speed.toString();
         }
 
         // Update every 100ms
