@@ -140,20 +140,115 @@ const description =
             border-color: #475569 !important; /* slate-600 solid */
             background-image: none !important;
         }
-        .dark .input-field:focus,
-        .dark select:focus {
-            border-color: #7dd3fc !important; /* sky-300 - subtle light blue */
-            box-shadow: 0 0 0 2px rgba(125, 211, 252, 0.3) !important; /* subtle blue glow */
+
+        /* ==========================================
+           ANIMATED GRADIENT SWOOSH BORDER ON FOCUS
+           Creates a sweeping beam effect
+           ========================================== */
+
+        /* The swoosh border wrapper */
+        .input-wrapper .relative {
+            position: relative;
+            z-index: 1;
         }
 
+        /* Ensure input is above the swoosh border */
+        .input-wrapper .relative .input-field {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Create the shimmer beam border */
+        .input-wrapper .relative::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            border-radius: 8px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+
+            /* The shimmer gradient - 295deg diagonal, narrow beam with transparent ends */
+            background: linear-gradient(
+                    295deg,
+                    transparent 0%,
+                    transparent 45%,
+                    #22d3ee 47%,
+                    #3b82f6 50%,
+                    #0a79c8 53%,
+                    transparent 55%,
+                    transparent 100%
+                )
+                0 0 / 300% 100% no-repeat;
+
+            /* Mask to show only the border */
+            -webkit-mask:
+                linear-gradient(#0000, #0000) padding-box,
+                linear-gradient(#fff, #fff) border-box;
+            mask:
+                linear-gradient(#0000, #0000) padding-box,
+                linear-gradient(#fff, #fff) border-box;
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            padding: 2px;
+        }
+
+        /* Show and animate the beam on focus */
+        .input-wrapper .relative:focus-within::before {
+            opacity: 1;
+            animation: shimmer 4s ease-in-out infinite;
+        }
+
+        /* The shimmer animation - sweeps from right to left */
+        @keyframes shimmer {
+            0% {
+                background-position: 100% 0;
+            }
+            50%,
+            100% {
+                background-position: 0% 0;
+            }
+        }
+
+        /* Hide default focus ring when swoosh is active */
+        .input-wrapper .relative:focus-within .input-field {
+            border-color: transparent !important;
+            box-shadow: none !important;
+            outline: none !important;
+        }
+
+        /* Keep input background solid in dark mode */
+        .dark .input-wrapper .relative:focus-within .input-field {
+            background-color: #1e293b !important;
+            background-image: none !important;
+            color: #e2e8f0 !important;
+        }
+
+        /* Keep input background solid in light mode */
+        .input-wrapper .relative:focus-within .input-field {
+            background-color: #f9fafb !important;
+            background-image: none !important;
+            color: #1f2937 !important;
+        }
+
+        /* Dark mode override must come after */
+        .dark .input-wrapper .relative:focus-within .input-field {
+            background-color: #1e293b !important;
+            background-image: none !important;
+            color: #e2e8f0 !important;
+        }
+
+        /* Keep placeholder visible */
+        .input-field:focus::placeholder {
+            color: #9ca3af !important;
+            opacity: 0.7;
+        }
     </style>
 
     <div class="pt-36 pb-12">
         <div id="book-appointment-form" class="py-12 px-4">
-            <div
-                id="form-container-wrapper"
-                class="max-w-2xl mx-auto"
-            >
+            <div id="form-container-wrapper" class="max-w-2xl mx-auto">
                 <div
                     class="bg-white dark:bg-slate-800/50 border border-gray-100 dark:border-white/10 shadow-xl dark:shadow-black/20 rounded-3xl p-6 sm:p-8 md:p-12 backdrop-blur-sm transition-all duration-300"
                 >
@@ -167,9 +262,11 @@ const description =
                                     >Secure Your Spot</span
                                 > – Get Started Here
                             </h5>
-                            
+
                             <!-- Glowing Beam Effect (uses global .glow-beam class) -->
-                            <div class="relative w-full h-8 mb-2 flex justify-center">
+                            <div
+                                class="relative w-full h-8 mb-2 flex justify-center"
+                            >
                                 <div class="glow-beam"></div>
                             </div>
                             <p
