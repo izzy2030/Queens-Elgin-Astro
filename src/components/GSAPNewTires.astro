@@ -182,9 +182,21 @@ CTA Section */
     import { ScrollTrigger } from "gsap/ScrollTrigger";
     gsap.registerPlugin(ScrollTrigger);
 
-    function initScrollPromo() {
+    async function initScrollPromo() {
+        // CLEANUP: Kill ALL existing ScrollTriggers to prevent conflicts from previous page navigations
+        // This is critical for Astro View Transitions to avoid pinning issues/overlapping text
+        ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+
+        // Wait for layout to settle (critical for View Transitions)
+        await new Promise((resolve) => setTimeout(resolve, 100));
+
         const container = document.getElementById("scroll-promo");
-        if (!container || container.dataset.initialized) return;
+        // Remove the dataset check or reset it because on navigation we get a new container
+        // but we still want to ensure we don't double-init if called multiple times on same page
+        if (!container) return;
+
+        // If we already initialized this SPECIFIC container, stop.
+        if (container.dataset.initialized === "true") return;
         container.dataset.initialized = "true";
 
         const mainSection = container.querySelector('[data-section="main"]');
@@ -207,6 +219,8 @@ CTA Section */
                 pin: true,
                 scrub: 2, // Higher value = smoother animation
                 anticipatePin: 1,
+                // Add invalidateOnRefresh to handle resize/nav better
+                invalidateOnRefresh: true,
             },
         });
 
@@ -335,13 +349,11 @@ CTA Section */
                 },
             });
         }
+
+        // Force refresh to ensure start/end positions are calculated correctly after layout settles
+        ScrollTrigger.refresh();
     }
 
-    // Initialize
+    // Initialize on page load (covers initial load and view transitions)
     document.addEventListener("astro:page-load", initScrollPromo);
-    if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", initScrollPromo);
-    } else {
-        initScrollPromo();
-    }
 </script>
