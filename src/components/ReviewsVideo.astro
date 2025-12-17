@@ -31,10 +31,12 @@ const getInitials = (name: string) => {
         .toUpperCase();
 };
 
-const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
+// We need 3x for seamless looping
+const allReviews = [...reviews, ...reviews, ...reviews];
+const reviewCount = reviews.length;
 ---
 
-<section class="reviews-video-section">
+<section class="reviews-video-section" data-review-count={reviewCount}>
     <div class="reviews-container">
         <!-- Header -->
         <div class="reviews-header">
@@ -69,11 +71,11 @@ const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
             </div>
 
             <!-- Right: Review Cards (looping) -->
-            <div class="review-cards-wrapper">
+            <div class="review-cards-wrapper" id="review-cards-wrapper">
                 <div class="review-cards-track" id="review-cards-track">
                     {
-                        allReviews.map((review) => (
-                            <div class="review-card">
+                        allReviews.map((review, index) => (
+                            <div class="review-card" data-index={index}>
                                 <div class="review-stars">
                                     {Array.from({ length: review.stars }).map(
                                         () => (
@@ -117,7 +119,9 @@ const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
         --accent: #0a79c8;
 
         background: var(--section-bg);
-        padding: 6rem 1.5rem 2rem;
+        padding: 6rem 1.5rem 4rem;
+        overflow: hidden;
+        position: relative;
     }
 
     :global(.dark) .reviews-video-section {
@@ -132,6 +136,8 @@ const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
     .reviews-container {
         max-width: 1280px;
         margin: 0 auto;
+        position: relative;
+        z-index: 1;
     }
 
     /* Header */
@@ -227,25 +233,18 @@ const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
         opacity: 0.8;
     }
 
-    /* Review Cards */
+    /* Review Cards - Fixed height container */
     .review-cards-wrapper {
         overflow: hidden;
         position: relative;
-        /* Defined height will be set by JS on page load */
+        height: 500px; /* Default fallback height, will be set by JS */
     }
 
     .review-cards-track {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        position: absolute; /* Allow precise positioning by JS */
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .review-cards-track:hover {
-        animation-play-state: paused;
+        will-change: transform;
     }
 
     .review-card {
@@ -312,63 +311,112 @@ const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
         }
 
         .video-card {
-            aspect-ratio: 1 / 1; /* Square video */
+            aspect-ratio: 1 / 1;
             max-width: 400px;
             margin: 0 auto;
         }
 
+        .review-cards-wrapper {
+            height: auto !important;
+            overflow: visible;
+        }
+
         .review-cards-track {
-            animation: none;
-            transform: none;
+            position: static;
+            transform: none !important;
         }
     }
 </style>
 
 <script>
     import gsap from "gsap";
-    import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-    gsap.registerPlugin(ScrollTrigger);
-
-    let ctx;
+    let animation: gsap.core.Tween | null = null;
 
     function initReviewAnimation() {
-        if (ctx) ctx.revert();
+        // Kill any existing animation
+        if (animation) {
+            animation.kill();
+            animation = null;
+        }
+
+        // Skip on mobile
         if (window.innerWidth <= 900) return;
 
-        ctx = gsap.context(() => {
-            const wrapper = document.querySelector(".review-cards-wrapper");
-            const track = document.getElementById("review-cards-track");
-            if (!wrapper || !track) return;
+        const section = document.querySelector(".reviews-video-section");
+        const wrapper = document.getElementById("review-cards-wrapper");
+        const track = document.getElementById("review-cards-track");
 
-            const reviewsPerSet = reviews.length; // From Astro Frontmatter
-            const singleReviewHeight = track.querySelector(".review-card").offsetHeight;
-            const gap = parseFloat(getComputedStyle(track).gap); // Get actual gap value
-            
-            const totalSingleSetHeight = (singleReviewHeight * reviewsPerSet) + (gap * (reviewsPerSet - 1));
+        if (!section || !wrapper || !track) return;
 
-            wrapper.style.height = `${totalSingleSetHeight}px`;
+        // Get the review count from the data attribute
+        const reviewCount = parseInt(
+            section.getAttribute("data-review-count") || "2",
+            10,
+        );
 
-            gsap.to(track, {
-                y: -totalSingleSetHeight,
-                duration: 20,
-                ease: "none",
-                repeat: -1,
-                modifiers: {
-                    y: gsap.utils.wrap(-totalSingleSetHeight, 0)
-                }
-            });
+        // Get all review cards
+        const cards = track.querySelectorAll(".review-card");
+        if (cards.length === 0) return;
 
-            // Pause on hover
-            wrapper.addEventListener("mouseenter", () => gsap.to(track, { timeScale: 0 }));
-            wrapper.addEventListener("mouseleave", () => gsap.to(track, { timeScale: 1 }));
+        // Calculate dimensions
+        const firstCard = cards[0] as HTMLElement;
+        const cardHeight = firstCard.offsetHeight;
+        const gap = parseFloat(getComputedStyle(track).gap) || 24;
 
+        // Height of one set of original reviews
+        const singleSetHeight =
+            cardHeight * reviewCount + gap * (reviewCount - 1);
+
+        // Set wrapper height to show one set
+        wrapper.style.height = `${singleSetHeight}px`;
+
+        // Create infinite scrolling animation
+        animation = gsap.to(track, {
+            y: -(singleSetHeight + gap),
+            duration: 15,
+            ease: "none",
+            repeat: -1,
+            modifiers: {
+                y: gsap.utils.unitize(
+                    gsap.utils.wrap(0, -(singleSetHeight + gap)),
+                ),
+            },
+        });
+
+        // Pause on hover
+        wrapper.addEventListener("mouseenter", () => {
+            if (animation) animation.pause();
+        });
+
+        wrapper.addEventListener("mouseleave", () => {
+            if (animation) animation.resume();
         });
     }
 
+    // Initialize on page load
     document.addEventListener("astro:page-load", initReviewAnimation);
 
+    // Also initialize on DOMContentLoaded for initial page load
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initReviewAnimation);
+    } else {
+        // DOM is already ready
+        initReviewAnimation();
+    }
+
+    // Cleanup before page swap
     document.addEventListener("astro:before-swap", () => {
-        if (ctx) ctx.revert();
+        if (animation) {
+            animation.kill();
+            animation = null;
+        }
+    });
+
+    // Re-initialize on resize
+    let resizeTimeout: ReturnType<typeof setTimeout>;
+    window.addEventListener("resize", () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(initReviewAnimation, 250);
     });
 </script>

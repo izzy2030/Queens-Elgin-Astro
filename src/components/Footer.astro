@@ -16,11 +16,11 @@ const cleanTitle = (title: string) => {
 ---
 
 <footer
-  class="theme-dark !bg-black text-gray-400 py-12 border-t border-gray-800 relative z-50"
-  style="--bg-surface: #000000; background-color: #000000 !important;"
+  class="theme-dark !bg-black text-gray-400 py-12 relative z-50"
+  style="--bg-surface: #000000; background-color: #000000 !important; border-top: 1px solid #1f2937;"
 >
   <div class="container mx-auto px-6 max-w-7xl">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-6">
       {/* Column 1: Brand */}
       <div>
         <a href={`/`} class="inline-block group mb-4">
@@ -181,7 +181,8 @@ const cleanTitle = (title: string) => {
 
     {/* Bottom Bar */}
     <div
-      class="pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm"
+      class="pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-sm"
+      style="border-top: 1px solid #1f2937;"
     >
       <p>
         &copy; {new Date().getFullYear()}
