@@ -105,7 +105,6 @@
         --accent-light: rgba(10, 121, 200, 0.15);
 
         background: var(--section-bg);
-        margin-bottom: -30vh; /* Pull next section up to avoid dead space */
         overflow: hidden;
     }
 
@@ -217,7 +216,7 @@
         position: relative;
         z-index: 1;
     }
-    
+
     .step-dot {
         width: 32px;
         height: 32px;
@@ -232,7 +231,7 @@
         font-weight: 600;
         color: var(--text-secondary);
     }
-    
+
     .progress-step.active .step-dot {
         background: var(--accent);
         border-color: var(--accent);
@@ -307,7 +306,7 @@
         .process-left {
             display: none;
         }
-        
+
         .progress-track {
             visibility: visible; /* Make sure it's visible on mobile where GSAP isn't running */
         }
@@ -351,16 +350,16 @@
 
         // Wait for next frame for layout stability
         await new Promise(requestAnimationFrame);
-        
+
         // Don't run on mobile
         if (window.innerWidth <= 900) {
             // But ensure the progress fill is visible if we bail
             const progressFill = document.getElementById("progress-fill");
-            if(progressFill) {
+            if (progressFill) {
                 gsap.set(progressFill, { height: "25%" });
             }
             return;
-        };
+        }
 
         ctx = gsap.context(() => {
             const leftCol = section.querySelector(".process-left");
@@ -384,7 +383,7 @@
 
             // 2. Set initial progress fill height
             gsap.set(progressFill, { height: "25%" });
-            
+
             // 3. Pin the left column
             ScrollTrigger.create({
                 trigger: leftCol,
