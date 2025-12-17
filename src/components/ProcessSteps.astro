@@ -185,6 +185,7 @@
         flex-direction: column;
         align-items: center;
         gap: 2rem;
+        visibility: hidden; /* Hide until GSAP is ready */
     }
 
     .progress-line {
@@ -203,7 +204,7 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 25%;
+        height: 0%; /* Start at 0, GSAP will animate it */
         background: var(--accent);
         transition: height 0.4s ease;
     }
@@ -216,7 +217,7 @@
         position: relative;
         z-index: 1;
     }
-
+    
     .step-dot {
         width: 32px;
         height: 32px;
@@ -231,7 +232,7 @@
         font-weight: 600;
         color: var(--text-secondary);
     }
-
+    
     .progress-step.active .step-dot {
         background: var(--accent);
         border-color: var(--accent);
@@ -306,6 +307,10 @@
         .process-left {
             display: none;
         }
+        
+        .progress-track {
+            visibility: visible; /* Make sure it's visible on mobile where GSAP isn't running */
+        }
     }
 
     @media (max-width: 640px) {
@@ -346,8 +351,16 @@
 
         // Wait for next frame for layout stability
         await new Promise(requestAnimationFrame);
-
-        if (window.innerWidth <= 900) return;
+        
+        // Don't run on mobile
+        if (window.innerWidth <= 900) {
+            // But ensure the progress fill is visible if we bail
+            const progressFill = document.getElementById("progress-fill");
+            if(progressFill) {
+                gsap.set(progressFill, { height: "25%" });
+            }
+            return;
+        };
 
         ctx = gsap.context(() => {
             const leftCol = section.querySelector(".process-left");
@@ -360,7 +373,19 @@
             if (!leftCol || !progressTrack || !rightCol || cards.length === 0)
                 return;
 
-            // Pin the left column
+            // --- ANIMATIONS ---
+
+            // 1. Fade in the whole progress track to prevent FOUC
+            gsap.to(progressTrack, {
+                visibility: "visible",
+                duration: 0.5,
+                delay: 0.2,
+            });
+
+            // 2. Set initial progress fill height
+            gsap.set(progressFill, { height: "25%" });
+            
+            // 3. Pin the left column
             ScrollTrigger.create({
                 trigger: leftCol,
                 start: "top 120px",
@@ -370,7 +395,7 @@
                 pinSpacing: false,
             });
 
-            // Pin the progress track
+            // 4. Pin the progress track
             ScrollTrigger.create({
                 trigger: progressTrack,
                 start: "top 120px",
@@ -380,7 +405,7 @@
                 pinSpacing: false,
             });
 
-            // Update active card based on scroll
+            // 5. Update active card based on scroll
             cards.forEach((card, index) => {
                 ScrollTrigger.create({
                     trigger: card,
@@ -395,11 +420,17 @@
                 cards.forEach((c, i) =>
                     c.classList.toggle("active", i === index),
                 );
+                // This makes the dots active as you scroll past them
                 progressSteps.forEach((s, i) =>
                     s.classList.toggle("active", i <= index),
                 );
                 if (progressFill) {
-                    progressFill.style.height = `${((index + 1) / cards.length) * 100}%`;
+                    // Animate the fill line
+                    gsap.to(progressFill, {
+                        height: `${((index + 1) / cards.length) * 100}%`,
+                        duration: 0.4,
+                        ease: "power2.inOut",
+                    });
                 }
             }
         }, section); // Scope triggers to the section
