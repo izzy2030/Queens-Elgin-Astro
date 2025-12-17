@@ -25,7 +25,18 @@ export default defineConfig({
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api\/webhook/, '')
         }
+      },
+      // Fix MIME types for video files in Edge
+      headers: {
+        '*.mp4': {
+          'Content-Type': 'video/mp4'
+        },
+        '*.webm': {
+          'Content-Type': 'video/webm'
+        }
       }
-    }
+    },
+    // Ensure proper MIME type association
+    assetsInclude: ['**/*.mp4', '**/*.webm']
   }
 });

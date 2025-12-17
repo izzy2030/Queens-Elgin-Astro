@@ -43,14 +43,9 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
       </div>
     </div>
 
-    <!-- Bottom Video Section (Contained) -->
-    <div
-      class="relative w-full rounded-3xl overflow-hidden group shadow-2xl mt-8"
-      x-data="{ playing: true, muted: true }"
-    >
-      <!-- Video Element -->
+    <!-- Bottom Video Section -->
+    <div class="relative w-full rounded-3xl overflow-hidden shadow-2xl mt-8">
       <video
-        x-ref="heroVideo"
         autoplay
         loop
         muted
@@ -58,10 +53,7 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
         style="background-color: #1a1a1a;"
         class="w-full h-auto block"
       >
-        <source
-          src="/video/Queens Elgin - Website Video Intro.mp4"
-          type="video/mp4"
-        />
+        <source src="/video/queens-elgin-intro.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -70,61 +62,6 @@ const { brand = mobileTiresBrand } = Astro.props as { brand?: BrandConfig };
         class="absolute inset-0 bg-gradient-to-t from-queens-primary/60 via-transparent to-transparent opacity-60 pointer-events-none"
       >
       </div>
-      <div
-        class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700 pointer-events-none"
-      >
-      </div>
-
-      <!-- Controls -->
-      <div class="absolute bottom-8 right-8 z-20 flex gap-4">
-        <button
-          @click="$refs.heroVideo.paused ? $refs.heroVideo.play() : $refs.heroVideo.pause(); playing = !$refs.heroVideo.paused"
-          class="w-12 h-12 flex items-center justify-center rounded-full bg-black/50 backdrop-blur-md text-white border border-white/20 hover:bg-white/20 transition-all font-sans"
-          aria-label="Toggle Play/Pause"
-        >
-          <template x-if="playing">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
-            </svg>
-          </template>
-          <template x-if="!playing">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-6 h-6 ml-1"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"
-              ></path>
-            </svg>
-          </template>
-        </button>
-      </div>
     </div>
   </div>
 </section>
-
-<!-- Alpine.js (if not loaded) -->
-<script>
-  import Alpine from "alpinejs";
-
-  if (!window.Alpine) {
-    window.Alpine = Alpine;
-    Alpine.start();
-  }
-</script>
