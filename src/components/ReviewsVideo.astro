@@ -30,6 +30,8 @@ const getInitials = (name: string) => {
         .substring(0, 2)
         .toUpperCase();
 };
+
+const allReviews = [...reviews, ...reviews]; // Duplicate for seamless loop
 ---
 
 <section class="reviews-video-section">
@@ -70,38 +72,8 @@ const getInitials = (name: string) => {
             <div class="review-cards-wrapper">
                 <div class="review-cards-track" id="review-cards-track">
                     {
-                        reviews.map((review, index) => (
-                            <div class="review-card" data-index={index}>
-                                <div class="review-stars">
-                                    {Array.from({ length: review.stars }).map(
-                                        () => (
-                                            <span class="star">★</span>
-                                        ),
-                                    )}
-                                </div>
-                                <blockquote class="review-text">
-                                    "{review.text}"
-                                </blockquote>
-                                <div class="review-author">
-                                    <div class="author-avatar">
-                                        {getInitials(review.name)}
-                                    </div>
-                                    <div class="author-info">
-                                        <div class="author-name">
-                                            {review.name}
-                                        </div>
-                                        <div class="author-role">
-                                            {review.role}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))
-                    }
-                    <!-- Duplicate for seamless loop -->
-                    {
-                        reviews.map((review, index) => (
-                            <div class="review-card" data-index={index}>
+                        allReviews.map((review) => (
+                            <div class="review-card">
                                 <div class="review-stars">
                                     {Array.from({ length: review.stars }).map(
                                         () => (
@@ -259,22 +231,17 @@ const getInitials = (name: string) => {
     .review-cards-wrapper {
         overflow: hidden;
         position: relative;
+        /* Defined height will be set by JS on page load */
     }
 
     .review-cards-track {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        animation: scrollReviews 12s linear infinite;
-    }
-
-    @keyframes scrollReviews {
-        0% {
-            transform: translateY(0);
-        }
-        100% {
-            transform: translateY(-50%);
-        }
+        position: absolute; /* Allow precise positioning by JS */
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     .review-cards-track:hover {
@@ -356,3 +323,52 @@ const getInitials = (name: string) => {
         }
     }
 </style>
+
+<script>
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    let ctx;
+
+    function initReviewAnimation() {
+        if (ctx) ctx.revert();
+        if (window.innerWidth <= 900) return;
+
+        ctx = gsap.context(() => {
+            const wrapper = document.querySelector(".review-cards-wrapper");
+            const track = document.getElementById("review-cards-track");
+            if (!wrapper || !track) return;
+
+            const reviewsPerSet = reviews.length; // From Astro Frontmatter
+            const singleReviewHeight = track.querySelector(".review-card").offsetHeight;
+            const gap = parseFloat(getComputedStyle(track).gap); // Get actual gap value
+            
+            const totalSingleSetHeight = (singleReviewHeight * reviewsPerSet) + (gap * (reviewsPerSet - 1));
+
+            wrapper.style.height = `${totalSingleSetHeight}px`;
+
+            gsap.to(track, {
+                y: -totalSingleSetHeight,
+                duration: 20,
+                ease: "none",
+                repeat: -1,
+                modifiers: {
+                    y: gsap.utils.wrap(-totalSingleSetHeight, 0)
+                }
+            });
+
+            // Pause on hover
+            wrapper.addEventListener("mouseenter", () => gsap.to(track, { timeScale: 0 }));
+            wrapper.addEventListener("mouseleave", () => gsap.to(track, { timeScale: 1 }));
+
+        });
+    }
+
+    document.addEventListener("astro:page-load", initReviewAnimation);
+
+    document.addEventListener("astro:before-swap", () => {
+        if (ctx) ctx.revert();
+    });
+</script>
