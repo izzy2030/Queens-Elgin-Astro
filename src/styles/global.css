@@ -15,14 +15,24 @@
 
 @theme {
     --color-queens-primary: #0b1121;
+    --color-queens-secondary-ultra-dark: #021828;
+    --color-queens-secondary-darker: #043050;
+    --color-queens-secondary-dark: #064978;
+    --color-queens-secondary-medium-dark: #0861a0;
     --color-queens-secondary: #0a79c8;
+    --color-queens-secondary-medium-light: #3b94d3;
+    --color-queens-secondary-light: #6cafde;
+    --color-queens-secondary-lighter: #9dc9e9;
+    --color-queens-secondary-ultra-light: #cee4f4;
     --color-queens-dark: #141517;
     --color-queens-light: #1489e1;
     --color-queens-orange: #f97316;
     --color-queens-black: #050505;
 
-    --font-sans: "Manrope", sans-serif;
+    --font-sans: "Instrument Sans", "Inter", sans-serif;
+    --font-manrope: "Manrope", sans-serif;
     --font-serif: "Source Serif 4", serif;
+    --font-yellowtail: "Yellowtail", cursive;
 
     --max-width-site: 1400px;
 }
@@ -95,7 +105,7 @@ nav a.hover\:text-queens-secondary:hover {
     /* Background Colors - dark surfaces */
     --bg-page: var(--color-queens-dark-bg);
     /* Queens Dark */
-        --bg-surface: #141517;
+    --bg-surface: #141517;
     --bg-elevated: #0b1121;
     /* Queens Primary */
     --bg-muted: #0b1121;
@@ -732,30 +742,42 @@ html {
     display: none;
 }
 
-/* Secondary Button (Gray/Outline) */
+/* Secondary Button (Gray/Outline) - Theme Aware */
 .btn-secondary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: #e5e7eb;
-    color: #374151;
-    border: none;
+    background: #ffffff;
+    color: #0b1121;
+    border: 1px solid #e5e7eb;
     border-radius: 9999px;
-    font-size: 1.125rem;
+    font-size: 0.875rem;
     font-weight: 700;
     cursor: pointer;
     position: relative;
     z-index: 1;
     overflow: hidden;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    padding: 1rem 3rem;
-    transition: color 0.3s ease, background 0.3s ease;
+    padding: 0.625rem 1.5rem;
+    transition: all 0.3s ease;
     text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: #d1d5db;
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateY(-1px);
+}
+
+.dark .btn-secondary {
+    background: rgba(2, 24, 40, 0.4) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(12px);
+}
+
+.dark .btn-secondary:hover {
+    background: rgba(2, 24, 40, 0.6) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 /* ========================================
