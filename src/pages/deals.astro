@@ -83,14 +83,15 @@ const deals = [
             </div>
 
             <div
-                class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none"
+                class="service-card-section mx-auto mt-16 max-w-7xl sm:mt-20 lg:mt-24 -mx-4 px-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12 xl:-mx-[calc((100vw-80rem)/2)] xl:px-[calc((100vw-80rem)/2)]"
+                data-reveal
             >
                 <div
                     class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3"
                 >
                     {
                         deals.map((deal, index) => (
-                            <div class="rich-text glow-beam-hover flex flex-col rounded-3xl bg-gray-100 dark:bg-slate-800/50 p-8 shadow-xl dark:shadow-black/20 border border-gray-200 dark:border-white/10 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] text-center h-full">
+                        <div class="service-card-item rich-text glow-beam-hover flex flex-col rounded-3xl p-8 shadow-xl dark:shadow-black/20 backdrop-blur-sm transition-all duration-300 hover:shadow-2xl hover:scale-[1.02] text-center h-full">
                                 <h2 class="text-gray-900 dark:text-white !mb-0">
                                     {deal.title}
                                 </h2>
@@ -109,10 +110,14 @@ const deals = [
                                 <p class="paragraph-3 text-gray-500 dark:text-gray-400 mb-6 px-2">
                                     {deal.details}
                                 </p>
-                                <div class="border-t border-gray-200 dark:border-gray-700 pt-6 mt-auto">
+                                <div class={`border-t pt-6 mt-auto ${ (index + 1) % 2 === 0 ? 'border-white/10' : 'border-gray-200 dark:border-gray-700' }`}>
                                     <a
                                         href={deal.link}
-                                        class="inline-block w-full rounded-full bg-queens-secondary hover:bg-queens-light px-6 py-3 text-center text-sm font-semibold text-white shadow-md hover:shadow-lg transition-all duration-300"
+                                        class={`inline-block w-full rounded-full px-6 py-3 text-center text-sm font-semibold shadow-md hover:shadow-lg transition-all duration-300 ${
+                                            (index + 1) % 2 === 0 
+                                            ? 'bg-white text-queens-primary hover:bg-gray-100' 
+                                            : 'bg-queens-secondary text-white hover:bg-queens-light'
+                                        }`}
                                     >
                                         {deal.cta}
                                     </a>
