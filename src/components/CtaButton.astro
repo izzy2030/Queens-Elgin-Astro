@@ -4,6 +4,7 @@ interface Props {
   text?: string;
   class?: string;
   variant?: "standard" | "large";
+  reload?: boolean;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   text = "Get in touch",
   class: className = "",
   variant = "standard",
+  reload = false,
 } = Astro.props;
 
 // Class mappings for variants
@@ -48,6 +50,7 @@ const textClasses = {
 
 <a
   href={href}
+  data-astro-reload={reload || undefined}
   class:list={[
     "group relative inline-flex items-center rounded-full bg-queens-secondary transition-all duration-500 ease-out active:scale-95",
     containerClasses[variant],

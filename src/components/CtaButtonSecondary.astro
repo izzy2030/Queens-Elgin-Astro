@@ -3,17 +3,20 @@ interface Props {
   href?: string;
   text?: string;
   class?: string;
+  reload?: boolean;
 }
 
 const {
   href = "/request-an-appointment",
   text = "Schedule Service",
   class: className = "",
+  reload = false,
 } = Astro.props;
 ---
 
 <a
   href={href}
+  data-astro-reload={reload || undefined}
   class:list={[
     "group inline-flex items-center gap-3 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 hover:scale-[1.03] active:scale-95 shadow-sm",
     "bg-white border border-gray-200 text-gray-900 hover:bg-gray-50 hover:border-gray-300", // Light Mode

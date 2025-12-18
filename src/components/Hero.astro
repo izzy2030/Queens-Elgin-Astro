@@ -54,11 +54,10 @@ const avatars = [
 
         <!-- Headline -->
         <h1
-          class="text-5xl md:text-7xl xl:text-8xl font-sans font-bold text-queens-primary dark:text-white mb-8 leading-[1.02] tracking-tight"
+          class="text-5xl md:text-7xl xl:text-8xl font-anton text-queens-primary dark:text-white mb-8 leading-[0.95] tracking-tight uppercase"
         >
           Your Local Expert for <br />
-          <span
-            class="text-queens-secondary font-yellowtail font-normal italic lowercase pt-2 block sm:inline"
+          <span class="text-queens-secondary block sm:inline pt-2"
             >Tires & Auto Repair.</span
           >
         </h1>
@@ -138,7 +137,9 @@ const avatars = [
       </div>
 
       <!-- Right Column: Video/Image Card (5 cols) -->
-      <div class="lg:col-span-5 relative group">
+      <div
+        class="lg:col-span-5 relative group flex flex-col gap-6 -mt-8 lg:-mt-12 xl:-mt-20"
+      >
         <div
           class="relative rounded-[3rem] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] dark:shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)] aspect-[4/5] lg:aspect-[5/6] transform hover:scale-[1.01] transition-all duration-700 ease-in-out"
         >
@@ -157,7 +158,7 @@ const avatars = [
             />
           </video>
 
-          <!-- Premium Notification Card -->
+          <!-- Premium Notification Card - Tire Promotion -->
           <div
             class="absolute bottom-8 left-6 right-6 sm:bottom-10 sm:left-8 sm:right-8 group/notify"
           >
@@ -165,45 +166,55 @@ const avatars = [
               class="bg-white/70 dark:bg-gray-900/60 backdrop-blur-2xl p-5 sm:p-6 rounded-[2rem] border border-white/40 dark:border-white/10 shadow-2xl flex items-center gap-5 transform translate-y-2 group-hover:translate-y-0 transition-all duration-700 ease-out group-hover:bg-white/80 dark:group-hover:bg-gray-900/80"
             >
               <div
-                class="relative w-14 h-14 rounded-2xl bg-queens-primary flex items-center justify-center text-white shadow-xl group-hover/notify:scale-110 transition-transform"
+                class="relative w-14 h-14 rounded-2xl bg-queens-secondary flex items-center justify-center text-white shadow-xl group-hover/notify:scale-110 transition-transform"
               >
+                <!-- Tire/Wheel Icon -->
                 <svg
                   class="w-7 h-7"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
-                  ><path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg
+                  stroke-width="1.5"
                 >
+                  <circle cx="12" cy="12" r="9" stroke-linecap="round"></circle>
+                  <circle cx="12" cy="12" r="4" stroke-linecap="round"></circle>
+                  <line x1="12" y1="3" x2="12" y2="8" stroke-linecap="round"
+                  ></line>
+                  <line x1="12" y1="16" x2="12" y2="21" stroke-linecap="round"
+                  ></line>
+                  <line x1="3" y1="12" x2="8" y2="12" stroke-linecap="round"
+                  ></line>
+                  <line x1="16" y1="12" x2="21" y2="12" stroke-linecap="round"
+                  ></line>
+                </svg>
                 <span class="absolute -top-1 -right-1 flex h-4 w-4">
                   <span
-                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-queens-secondary-light opacity-75"
                   ></span>
                   <span
-                    class="relative inline-flex rounded-full h-4 w-4 bg-green-500 scale-75"
+                    class="relative inline-flex rounded-full h-4 w-4 bg-queens-secondary scale-75"
                   ></span>
                 </span>
               </div>
               <div class="flex-1 min-w-0">
-                <div class="flex justify-between items-center mb-1">
+                <div
+                  class="flex flex-col xs:flex-row xs:items-center justify-between gap-1 xs:gap-4 mb-1"
+                >
                   <p
-                    class="text-base font-bold text-queens-primary dark:text-white truncate"
+                    class="text-sm sm:text-base font-bold text-queens-primary dark:text-white"
                   >
-                    Queens Mobile Live
+                    New Tires in Stock
                   </p>
                   <span
-                    class="text-[9px] text-queens-secondary dark:text-queens-light font-black uppercase tracking-widest bg-queens-secondary/10 dark:bg-queens-secondary/20 px-2 py-0.5 rounded-full"
-                    >Active</span
+                    class="w-fit text-[9px] text-green-600 dark:text-green-400 font-black uppercase tracking-widest bg-green-500/10 dark:bg-green-500/20 px-2 py-0.5 rounded-full"
+                    >In Stock</span
                   >
                 </div>
                 <p
                   class="text-xs text-gray-600 dark:text-gray-300 font-medium leading-relaxed font-manrope"
                 >
-                  Mobile units currently servicing Elgin, Hoffman Estates &
-                  South Elgin area.
+                  Top brands ready for same-day installation. No appointment
+                  needed.
                 </p>
               </div>
             </div>
@@ -217,6 +228,49 @@ const avatars = [
           <div
             class="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[3rem] pointer-events-none"
           >
+          </div>
+        </div>
+
+        <!-- Trust Stat (Simplified & Dynamic Counter) -->
+        <div class="animate-fade-in animation-delay-2000 mt-4 sm:mt-6">
+          <div class="flex items-center gap-5 sm:gap-8">
+            <!-- The Big Number -->
+            <div class="flex items-baseline gap-1">
+              <span
+                id="hero-counter"
+                class="text-5xl sm:text-6xl lg:text-7xl font-anton text-queens-primary dark:text-white tracking-tighter leading-none"
+                data-target="25000">0</span
+              >
+              <span
+                class="text-4xl sm:text-5xl lg:text-6xl font-anton text-queens-secondary dark:text-queens-secondary-light leading-none"
+                >+</span
+              >
+            </div>
+
+            <!-- Divider -->
+            <div class="h-12 w-px bg-gray-200 dark:bg-white/10"></div>
+
+            <!-- Text Block -->
+            <div class="flex flex-col">
+              <span
+                class="text-xs sm:text-sm font-black uppercase tracking-[0.15em] text-queens-primary dark:text-white mb-1"
+                >Local Neighbors Served</span
+              >
+              <div class="flex items-center gap-1.5">
+                <span class="relative flex h-2 w-2">
+                  <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                  ></span>
+                  <span
+                    class="relative inline-flex rounded-full h-2 w-2 bg-green-500"
+                  ></span>
+                </span>
+                <span
+                  class="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider"
+                  >Serving Elgin since 2014</span
+                >
+              </div>
+            </div>
           </div>
         </div>
 
@@ -283,3 +337,47 @@ const avatars = [
     animation-delay: 4s;
   }
 </style>
+
+<script>
+  function initHeroCounter() {
+    const counter = document.getElementById("hero-counter");
+    if (!counter) return;
+
+    const target = parseInt(counter.getAttribute("data-target") || "0");
+    const duration = 2000; // 2 seconds
+    let startTime: number | null = null;
+    let hasAnimated = false;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated) {
+          hasAnimated = true;
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.5 },
+    );
+
+    function animate(currentTime: number) {
+      if (!startTime) startTime = currentTime;
+      const progress = Math.min((currentTime - startTime) / duration, 1);
+      // Easing function for smooth deceleration
+      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+      const currentCount = Math.floor(easeOutQuart * target);
+
+      if (counter) {
+        counter.textContent = currentCount.toLocaleString();
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    observer.observe(counter);
+  }
+
+  // Initialize on page load and after Astro view transitions
+  document.addEventListener("DOMContentLoaded", initHeroCounter);
+  document.addEventListener("astro:page-load", initHeroCounter);
+</script>

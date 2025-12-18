@@ -1,4 +1,7 @@
 ---
+import CtaButton from "./CtaButton.astro";
+import CtaButtonSecondary from "./CtaButtonSecondary.astro";
+
 /**
  * GSAPNewTires - GSAP New Tires Section
  * Section pins to viewport, scroll drives animations, then unpins.
@@ -44,15 +47,165 @@ promo-text--3">
             </p>
         </div>
     </section>
-    <!-- CTA
-Section (separate, not pinned) -->
-    <section class="promo-section
-promo-section--cta" data-section="cta">
+    <!-- CTA Section (Enhanced) -->
+    <section class="promo-section promo-section--cta" data-section="cta">
+        <!-- Radial Glow Background -->
+        <div class="promo-cta__glow"></div>
+
         <div class="promo-cta">
-            <span class="promo-cta__label">Claim your offer?</span>
-            <a href="/buy-new-tires" class="promo-cta__button"
-                >Shop Tires & Save</a
-            >
+            <!-- Headline -->
+            <h2 class="promo-cta__label">
+                FIND YOUR <span class="promo-cta__label-accent"
+                    >PERFECT TIRES</span
+                >
+            </h2>
+
+            <!-- Trust Signals -->
+            <div class="promo-cta__trust">
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Top Brands</span>
+                </div>
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Same-Day Install</span>
+                </div>
+                <div class="promo-cta__trust-item">
+                    <svg
+                        class="promo-cta__trust-icon"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    <span>Price Match</span>
+                </div>
+            </div>
+
+            <!-- Brand Logos Carousel -->
+            <div class="promo-cta__brands-wrapper">
+                <div class="promo-cta__brands-track" id="brands-track">
+                    <!-- First set -->
+                    <img
+                        src="/images/logos/tire brands logos/Michelin-Tires-Logo.webp"
+                        alt="Michelin"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Bridgestone-Tires-Logo.webp"
+                        alt="Bridgestone"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Cooper-Tires-Logo.webp"
+                        alt="Cooper"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Hankook-Tires-Logo.webp"
+                        alt="Hankook"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Kumho-Tires-Logo.webp"
+                        alt="Kumho"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/New-Nexen-Tires-Logo.webp"
+                        alt="Nexen"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Ironman-Tires-Logo.webp"
+                        alt="Ironman"
+                        class="promo-cta__brand-logo"
+                    />
+                    <!-- Duplicate set for seamless loop -->
+                    <img
+                        src="/images/logos/tire brands logos/Michelin-Tires-Logo.webp"
+                        alt="Michelin"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Bridgestone-Tires-Logo.webp"
+                        alt="Bridgestone"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Cooper-Tires-Logo.webp"
+                        alt="Cooper"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Hankook-Tires-Logo.webp"
+                        alt="Hankook"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Kumho-Tires-Logo.webp"
+                        alt="Kumho"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/New-Nexen-Tires-Logo.webp"
+                        alt="Nexen"
+                        class="promo-cta__brand-logo"
+                    />
+                    <img
+                        src="/images/logos/tire brands logos/Ironman-Tires-Logo.webp"
+                        alt="Ironman"
+                        class="promo-cta__brand-logo"
+                    />
+                </div>
+            </div>
+
+            <!-- Dual Buttons -->
+            <div class="promo-cta__buttons">
+                <CtaButton
+                    href="/buy-new-tires"
+                    text="Shop Tires Now"
+                    reload={true}
+                />
+                <CtaButtonSecondary
+                    href="/buy-new-tires"
+                    text="View All Brands"
+                    reload={true}
+                />
+            </div>
+
+            <!-- Free Alignment Callout -->
+            <p class="promo-cta__offer">
+                <span class="promo-cta__offer-badge">LIMITED TIME</span>
+                Free Alignment with 4-Tire Purchase
+            </p>
         </div>
     </section>
 </div>
@@ -115,7 +268,7 @@ promo-section--cta" data-section="cta">
     }
     .promo-text__tag {
         display: inline-block;
-        color: hsl(200 100% 50%);
+        color: #0a79c8;
         font-size: 0.3em;
         margin-bottom: -0.2em;
         will-change: opacity;
@@ -152,33 +305,147 @@ promo-section--cta" data-section="cta">
         color: hsl(0 0% 40%);
     } /*
 CTA Section */
+    .promo-section--cta {
+        overflow: hidden;
+    }
+    .promo-cta__glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 120%;
+        height: 120%;
+        background: radial-gradient(
+            ellipse at center,
+            rgba(10, 121, 200, 0.15) 0%,
+            transparent 60%
+        );
+        pointer-events: none;
+        z-index: 0;
+    }
     .promo-cta {
+        position: relative;
+        z-index: 1;
         display: grid;
         place-items: center;
-        gap: 2rem;
+        gap: 1.5rem;
         text-align: center;
+        padding: 2rem;
+        max-width: 900px;
     }
     .promo-cta__label {
-        font-size: clamp(2rem, 5vw + 1rem, 5rem);
-        font-weight: 700;
-        color: hsl(200 100% 60%);
+        font-family: "Anton", sans-serif;
+        font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
+        font-weight: 400;
+        color: white;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        line-height: 1;
+        margin: 0;
     }
-    .promo-cta__button {
-        display: inline-flex;
+    .promo-cta__label-accent {
+        color: #0a79c8;
+    }
+
+    /* Trust Signals */
+    .promo-cta__trust {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem 2rem;
+        margin-top: 0.5rem;
+    }
+    .promo-cta__trust-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: hsl(0 0% 60%);
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+    .promo-cta__trust-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        color: hsl(142 76% 45%);
+    }
+
+    /* Brand Logos Carousel */
+    .promo-cta__brands-wrapper {
+        width: 100%;
+        max-width: 800px;
+        overflow: hidden;
+        margin: 1.5rem 0;
+        padding: 1.5rem 0;
+        border-top: 1px solid hsl(0 0% 20%);
+        border-bottom: 1px solid hsl(0 0% 20%);
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0%,
+            black 10%,
+            black 90%,
+            transparent 100%
+        );
+    }
+    .promo-cta__brands-track {
+        display: flex;
+        align-items: center;
+        gap: 4rem;
+        width: max-content;
+    }
+    .promo-cta__brand-logo {
+        height: 36px;
+        width: auto;
+        opacity: 0.6;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+        flex-shrink: 0;
+    }
+    .promo-cta__brand-logo:hover {
+        opacity: 1;
+        filter: grayscale(0%);
+    }
+    @media (min-width: 768px) {
+        .promo-cta__brand-logo {
+            height: 48px;
+        }
+    }
+
+    /* Dual Buttons */
+    .promo-cta__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+    }
+
+    /* Offer Callout */
+    .promo-cta__offer {
+        display: flex;
         align-items: center;
         gap: 0.75rem;
-        background: hsl(200 100% 50%);
-        color: white;
-        font-weight: 600;
-        padding: 1.25rem 3rem;
-        border-radius: 100px;
-        font-size: 1.5rem;
-        text-decoration: none;
-        transition: all 0.3s ease;
+        font-size: 0.875rem;
+        color: hsl(0 0% 50%);
+        font-weight: 500;
+        margin-top: 1rem;
     }
-    .promo-cta__button:hover {
-        background: hsl(200 100% 60%);
-        transform: scale(1.05);
+    .promo-cta__offer-badge {
+        background: rgba(10, 121, 200, 0.15);
+        color: #0a79c8;
+        font-size: 0.625rem;
+        font-weight: 800;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        letter-spacing: 0.1em;
     }
 </style>
 <script>
@@ -386,6 +653,43 @@ CTA Section */
                         },
                     });
                 }
+            }
+
+            // ==========================================
+            // BRAND LOGOS INFINITE CAROUSEL
+            // ==========================================
+            const brandsTrack = container.querySelector("#brands-track");
+            if (brandsTrack) {
+                // Get the total width of the first half (original logos)
+                const logos = brandsTrack.querySelectorAll(
+                    ".promo-cta__brand-logo",
+                );
+                const logoCount = logos.length / 2; // Half are duplicates
+
+                // Calculate width of one set of logos
+                let totalWidth = 0;
+                for (let i = 0; i < logoCount; i++) {
+                    const logo = logos[i] as HTMLElement;
+                    totalWidth += logo.offsetWidth;
+                }
+                // Add gaps (4rem = 64px per gap, logoCount - 1 gaps in one set)
+                const gapWidth = 64 * logoCount;
+                const scrollDistance = totalWidth + gapWidth;
+
+                // Create infinite seamless loop
+                gsap.to(brandsTrack, {
+                    x: -scrollDistance,
+                    duration: 25,
+                    ease: "none",
+                    repeat: -1,
+                    modifiers: {
+                        x: gsap.utils.unitize(
+                            (x: number) =>
+                                parseFloat(x as unknown as string) %
+                                scrollDistance,
+                        ),
+                    },
+                });
             }
         }, container); // Scope matches container
 

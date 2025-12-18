@@ -28,8 +28,10 @@
     --color-queens-light: #1489e1;
     --color-queens-orange: #f97316;
     --color-queens-black: #050505;
+    --color-star-yellow: #facc15;
 
     --font-sans: "Instrument Sans", "Inter", sans-serif;
+    --font-anton: "Anton", sans-serif;
     --font-manrope: "Manrope", sans-serif;
     --font-serif: "Source Serif 4", serif;
     --font-yellowtail: "Yellowtail", cursive;
