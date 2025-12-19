@@ -253,9 +253,10 @@ promo-text--3">
         position: absolute;
         text-align: center;
         margin: 0;
-        font-weight: 900;
+        font-family: var(--font-display);
+        font-weight: 800;
         text-transform: uppercase;
-        letter-spacing: -0.02em;
+        letter-spacing: -0.01em;
         transform-origin: center center;
         padding: 0 1.5rem;
         max-width: 100vw;
@@ -335,13 +336,13 @@ CTA Section */
         max-width: 900px;
     }
     .promo-cta__label {
-        font-family: "Anton", sans-serif;
+        font-family: var(--font-display);
         font-size: clamp(2.5rem, 6vw + 1rem, 5rem);
-        font-weight: 400;
+        font-weight: 800;
         color: white;
-        letter-spacing: 0.02em;
+        letter-spacing: -0.01em;
         text-transform: uppercase;
-        line-height: 1;
+        line-height: 1.05;
         margin: 0;
     }
     .promo-cta__label-accent {
@@ -627,7 +628,8 @@ CTA Section */
             if (ctaSection) {
                 // Animate CTA label
                 if (ctaLabel) {
-                    gsap.fromTo(ctaLabel, 
+                    gsap.fromTo(
+                        ctaLabel,
                         { y: 40, opacity: 0 },
                         {
                             y: 0,
@@ -639,20 +641,28 @@ CTA Section */
                                 start: "top 90%",
                                 once: true,
                             },
-                        }
+                        },
                     );
                 }
 
                 // Animate trust signals, brands, and buttons
                 const ctaTrust = container.querySelector(".promo-cta__trust");
                 const ctaBrands = container.querySelector(".promo-cta__brands");
-                const ctaButtons = container.querySelector(".promo-cta__buttons");
+                const ctaButtons = container.querySelector(
+                    ".promo-cta__buttons",
+                );
                 const ctaOffer = container.querySelector(".promo-cta__offer");
-                
-                const ctaElements = [ctaTrust, ctaBrands, ctaButtons, ctaOffer].filter(Boolean);
-                
+
+                const ctaElements = [
+                    ctaTrust,
+                    ctaBrands,
+                    ctaButtons,
+                    ctaOffer,
+                ].filter(Boolean);
+
                 if (ctaElements.length > 0) {
-                    gsap.fromTo(ctaElements, 
+                    gsap.fromTo(
+                        ctaElements,
                         { y: 30, opacity: 0 },
                         {
                             y: 0,
@@ -665,7 +675,7 @@ CTA Section */
                                 start: "top 80%",
                                 once: true,
                             },
-                        }
+                        },
                     );
                 }
             }

@@ -53,7 +53,10 @@ html.lenis body {
     --color-star-yellow: #facc15;
 
     --font-sans: "Instrument Sans", "Inter", sans-serif;
-    --font-display: var(--font-sans);
+    --font-teko: "Teko", sans-serif;
+    --font-tanker: "Tanker", sans-serif;
+    --font-big-shoulders: "Big Shoulders Display", sans-serif;
+    --font-display: var(--font-big-shoulders);
     --font-boldonse: "Boldonse", sans-serif;
     --font-manrope: "Manrope", sans-serif;
     --font-serif: "Source Serif 4", serif;
@@ -205,6 +208,7 @@ nav a.hover\:text-queens-secondary:hover {
    ======================================== */
 
 body {
+    font-family: var(--font-sans);
     background-color: var(--bg-page);
     color: var(--text-primary);
     transition: background-color 0.3s ease, color 0.3s ease;
