@@ -1,7 +1,6 @@
 ---
 import { ViewTransitions } from "astro:transitions";
 
-import "@fontsource/source-serif-4";
 import "../styles/fonts.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
@@ -38,6 +37,27 @@ const isServiceSubPage =
     <meta name="description" content={description} />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Critical Font Preloads - Load these before CSS parsing -->
+    <link
+      rel="preload"
+      href="/fonts/BigShoulders-VariableFont.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/InstrumentSans-Regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+
+    <!-- Preconnect to external video host for Hero video -->
+    <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
+
     <title>{title}</title>
     <ViewTransitions />
     <script is:inline>

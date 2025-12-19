@@ -53,14 +53,9 @@ html.lenis body {
     --color-star-yellow: #facc15;
 
     --font-sans: "Instrument Sans", "Inter", sans-serif;
-    --font-teko: "Teko", sans-serif;
-    --font-tanker: "Tanker", sans-serif;
     --font-big-shoulders: "Big Shoulders Display", sans-serif;
     --font-display: var(--font-big-shoulders);
-    --font-boldonse: "Boldonse", sans-serif;
-    --font-manrope: "Manrope", sans-serif;
     --font-serif: "Source Serif 4", serif;
-    --font-yellowtail: "Yellowtail", cursive;
 
     --max-width-site: 1400px;
 }
@@ -293,10 +288,7 @@ h6,
     line-height: 1.1;
 }
 
-/* Force Boldonse Font Utility */
-.font-boldonse {
-    font-family: var(--font-boldonse);
-}
+
 
 @media (min-width: 1024px) {
     .main-header-h1 {
