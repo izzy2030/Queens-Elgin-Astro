@@ -40,7 +40,6 @@ const avatars = [
         <!-- Badge -->
         <div
           class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-queens-secondary-ultra-light dark:bg-queens-secondary-darker border border-queens-secondary-light dark:border-queens-secondary-dark text-queens-secondary-darker dark:text-queens-secondary-ultra-light text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] mb-8 hero-eyebrow"
-          style="opacity: 0;"
         >
           <span class="relative flex h-2 w-2">
             <span
@@ -73,13 +72,11 @@ const avatars = [
           service and top-tier equipment.
         </p>
 
-        <!-- Buttons -->
         <div class="flex flex-wrap gap-5 mb-20 hero-social-item">
           <CtaButton href="/request-an-appointment" text="Book Appointment" />
           <CtaButtonSecondary href="#homepage-deals" text="See Our Deals" />
         </div>
 
-        <!-- Social Proof -->
         <div
           class="flex flex-wrap items-center gap-12 border-t border-gray-100 dark:border-white/10 pt-12 w-full hero-social-item"
         >
@@ -164,7 +161,6 @@ const avatars = [
           <!-- Premium Notification Card - Tire Promotion -->
           <div
             class="absolute bottom-8 left-6 right-6 sm:bottom-10 sm:left-8 sm:right-8 group/notify hero-notification-card"
-            style="opacity: 0;"
           >
             <div
               class="bg-white/70 dark:bg-gray-900/60 backdrop-blur-2xl p-5 sm:p-6 rounded-[2rem] border border-white/40 dark:border-white/10 shadow-2xl flex items-center gap-5 transform translate-y-2 group-hover:translate-y-0 transition-all duration-700 ease-out group-hover:bg-white/80 dark:group-hover:bg-gray-900/80"
@@ -227,18 +223,16 @@ const avatars = [
           <!-- Enhanced Gradients -->
           <div
             class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none hero-video-gradient"
-            style="opacity: 0;"
           >
           </div>
           <div
             class="absolute inset-0 ring-1 ring-inset ring-white/20 rounded-[3rem] pointer-events-none hero-video-ring"
-            style="opacity: 0;"
           >
           </div>
         </div>
 
         <!-- Trust Stat (Simplified & Dynamic Counter) -->
-        <div class="animate-fade-in animation-delay-2000 mt-4 sm:mt-6 hero-social-item">
+        <div class="mt-4 sm:mt-6 hero-social-item">
           <div class="flex items-center gap-5 sm:gap-8">
             <!-- The Big Number -->
             <div class="flex items-baseline gap-1">
@@ -301,19 +295,17 @@ const avatars = [
 </section>
 
 <style>
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
+  .hero-social-item,
+  .hero-eyebrow,
+  .hero-notification-card,
+  .hero-video-gradient,
+  .hero-video-ring {
+    opacity: 0;
   }
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  .hero-headline-line {
+    clip-path: inset(0 100% 0 0);
+    will-change: clip-path;
   }
 
   @keyframes blob {
@@ -341,11 +333,6 @@ const avatars = [
 
   .animation-delay-4000 {
     animation-delay: 4s;
-  }
-
-  .hero-headline-line {
-    clip-path: inset(0 100% 0 0);
-    will-change: clip-path;
   }
 </style>
 
