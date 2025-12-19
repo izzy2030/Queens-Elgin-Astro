@@ -14,7 +14,8 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 ---
 
 <div
-  class="absolute top-0 left-0 right-0 z-50 flex justify-center md:pt-6 md:px-4 pointer-events-none"
+  id="header-wrapper"
+  class="fixed top-0 left-0 right-0 z-50 flex justify-center md:pt-6 md:px-4 pointer-events-none transition-transform duration-300"
 >
   <header
     id="main-nav"
@@ -24,9 +25,7 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     /* Desktop Styles */
     md:rounded-full md:px-6 md:py-3 md:shadow-[0_8px_30px_rgb(0,0,0,0.04)] md:dark:shadow-[0_8px_30px_rgb(0,0,0,0.2)] md:border md:border-white/20 md:dark:border-white/10 md:max-w-6xl
     ${brand.logoPathWhite || "text-white"} 
-    ${
-      "md:bg-white md:dark:bg-[#141517] md:shadow-sm md:border md:border-gray-100 md:dark:border-gray-800 transition-colors duration-300"
-    }`}
+    ${"md:bg-white md:dark:bg-[#141517] md:shadow-sm md:border md:border-gray-100 md:dark:border-gray-800 transition-colors duration-300"}`}
   >
     <!-- Logo -->
     <a
@@ -79,6 +78,12 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
         data-astro-prefetch="hover"
         class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
         >Services</a
+      >
+      <a
+        href={`/about`}
+        data-astro-prefetch="hover"
+        class={`text-sm font-medium hover:text-queens-secondary px-4 py-2 rounded-full transition-all ${inverse ? "text-white/90 hover:text-white" : "text-gray-600 dark:text-gray-300"}`}
+        >About</a
       >
       <a
         href={`/buy-new-tires`}
@@ -271,6 +276,12 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
           Services
         </a>
         <a
+          href={`/about`}
+          class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
+        >
+          About
+        </a>
+        <a
           href={`/buy-new-tires`}
           data-astro-reload
           class="text-2xl font-bold text-gray-900 dark:text-white hover:text-queens-primary transition-colors"
@@ -306,42 +317,111 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
 
   function setupHeader() {
     const nav = document.getElementById("main-nav");
+    const wrapper = document.getElementById("header-wrapper");
     const mobileMenuButton = document.getElementById("mobile-menu-button");
     const mobileMenu = document.getElementById("mobile-menu");
-    const mobileMenuDarkLayer = document.getElementById("mobile-menu-dark-layer");
+    const mobileMenuDarkLayer = document.getElementById(
+      "mobile-menu-dark-layer",
+    );
     const mobileMenuPanel = document.getElementById("mobile-menu-panel");
     const mobileMenuLinks = document.getElementById("mobile-menu-links");
     const mobileMenuBackdrop = document.getElementById("mobile-menu-backdrop");
     const mobileMenuClose = document.getElementById("mobile-menu-close");
 
-    if (!nav) return;
+    if (!nav || !wrapper) return;
+
+    // --- Sticky Scroll Animation ---
+    let lastScrollY = window.scrollY;
+    let isHidden = false;
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: 999999,
+      onUpdate: (self) => {
+        const currentScrollY = self.scroll();
+
+        // Only hide if we've scrolled down more than 100px
+        if (currentScrollY > 100) {
+          if (self.direction === 1 && !isHidden) {
+            // Scrolling down - hide
+            gsap.to(wrapper, {
+              yPercent: -100,
+              duration: 0.4,
+              ease: "power2.inOut",
+            });
+            isHidden = true;
+          } else if (self.direction === -1 && isHidden) {
+            // Scrolling up - show
+            gsap.to(wrapper, {
+              yPercent: 0,
+              duration: 0.4,
+              ease: "power2.out",
+            });
+            isHidden = false;
+          }
+        } else {
+          // Always show at top
+          gsap.to(wrapper, {
+            yPercent: 0,
+            duration: 0.4,
+            ease: "power2.out",
+          });
+          isHidden = false;
+        }
+
+        lastScrollY = currentScrollY;
+      },
+    });
 
     // --- Mobile Menu Logic ---
-    if (!mobileMenuButton || !mobileMenu || !mobileMenuPanel || !mobileMenuDarkLayer) return;
+    if (
+      !mobileMenuButton ||
+      !mobileMenu ||
+      !mobileMenuPanel ||
+      !mobileMenuDarkLayer
+    )
+      return;
 
     const openMobileMenu = () => {
       mobileMenu.classList.remove("hidden");
       document.body.style.overflow = "hidden";
-      
-      gsap.to(mobileMenuDarkLayer, { x: "0%", duration: 0.5, ease: "power3.out" });
-      gsap.to(mobileMenuPanel, { x: "0%", duration: 0.5, ease: "power3.out", delay: 0.1 });
-      gsap.to(mobileMenuLinks, { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.7, 
-        delay: 0.3, 
-        ease: "power3.out" 
+
+      gsap.to(mobileMenuDarkLayer, {
+        x: "0%",
+        duration: 0.5,
+        ease: "power3.out",
+      });
+      gsap.to(mobileMenuPanel, {
+        x: "0%",
+        duration: 0.5,
+        ease: "power3.out",
+        delay: 0.1,
+      });
+      gsap.to(mobileMenuLinks, {
+        opacity: 1,
+        y: 0,
+        duration: 0.7,
+        delay: 0.3,
+        ease: "power3.out",
       });
     };
 
     const closeMobileMenu = () => {
       gsap.to(mobileMenuLinks, { opacity: 0, y: 30, duration: 0.3 });
-      gsap.to(mobileMenuPanel, { x: "-100%", duration: 0.5, ease: "power3.in" });
-      gsap.to(mobileMenuDarkLayer, { x: "-100%", duration: 0.5, ease: "power3.in", delay: 0.1, 
+      gsap.to(mobileMenuPanel, {
+        x: "-100%",
+        duration: 0.5,
+        ease: "power3.in",
+      });
+      gsap.to(mobileMenuDarkLayer, {
+        x: "-100%",
+        duration: 0.5,
+        ease: "power3.in",
+        delay: 0.1,
         onComplete: () => {
           mobileMenu.classList.add("hidden");
           document.body.style.overflow = "";
-        }
+        },
       });
     };
 
@@ -352,8 +432,15 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
     mobileMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", (e) => {
         if (link.dataset.isClosing === "true") return;
-        if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || (link as HTMLAnchorElement).target === "_blank") return;
-        
+        if (
+          e.metaKey ||
+          e.ctrlKey ||
+          e.shiftKey ||
+          e.altKey ||
+          (link as HTMLAnchorElement).target === "_blank"
+        )
+          return;
+
         e.preventDefault();
         closeMobileMenu();
         setTimeout(() => {
@@ -363,11 +450,11 @@ const secondName = nameParts.length > 1 ? nameParts[1] : "";
       });
     });
 
-    document.addEventListener("astro:before-swap", () => closeMobileMenu(), { once: true });
+    document.addEventListener("astro:before-swap", () => closeMobileMenu(), {
+      once: true,
+    });
   }
 
   // Use ONLY astro:page-load for consistent cross-page behavior
   document.addEventListener("astro:page-load", setupHeader);
 </script>
-
-
