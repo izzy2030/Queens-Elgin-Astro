@@ -25,7 +25,7 @@ const snapLink =
                     </span>
                     Smart Financing
                 </span>
-                <h2 class="financing-title">
+                <h2 class="financing-title display-xl">
                     Get What You Need <br />
                     <span class="text-queens-secondary">Today.</span>
                 </h2>
@@ -208,9 +208,6 @@ const snapLink =
     }
 
     .financing-title {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-        line-height: 1.1;
-        font-weight: 900;
         color: #0f172a;
         margin-bottom: 1.5rem;
     }
@@ -361,18 +358,27 @@ const snapLink =
             const title = section.querySelector(".financing-title");
             const description = section.querySelector(".financing-description");
             const featureItems = section.querySelectorAll(".feature-item");
-            const ctaContainer = section.querySelector(".financing-cta-container");
+            const ctaContainer = section.querySelector(
+                ".financing-cta-container",
+            );
             const visual = section.querySelector(".financing-visual");
 
             // Build array of left-side elements
-            const leftElements = [badge, title, description, ...Array.from(featureItems), ctaContainer].filter(Boolean);
+            const leftElements = [
+                badge,
+                title,
+                description,
+                ...Array.from(featureItems),
+                ctaContainer,
+            ].filter(Boolean);
 
             // Animate left content with stagger
             if (leftElements.length > 0) {
-                gsap.fromTo(leftElements,
-                    { 
-                        x: -40, 
-                        opacity: 0 
+                gsap.fromTo(
+                    leftElements,
+                    {
+                        x: -40,
+                        opacity: 0,
                     },
                     {
                         x: 0,
@@ -384,18 +390,19 @@ const snapLink =
                             trigger: section,
                             start: "top 60%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Animate right visual (logo)
             if (visual) {
-                gsap.fromTo(visual,
-                    { 
-                        x: 50, 
-                        opacity: 0, 
-                        scale: 0.9 
+                gsap.fromTo(
+                    visual,
+                    {
+                        x: 50,
+                        opacity: 0,
+                        scale: 0.9,
                     },
                     {
                         x: 0,
@@ -407,8 +414,8 @@ const snapLink =
                             trigger: section,
                             start: "top 60%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
         }, section);
@@ -429,5 +436,3 @@ const snapLink =
         }
     });
 </script>
-
-

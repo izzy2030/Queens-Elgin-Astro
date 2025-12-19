@@ -10,7 +10,7 @@ import CtaButton from "./CtaButton.astro";
     <div class="process-container">
         <!-- Left Column -->
         <div class="process-left">
-            <h2 class="process-title">
+            <h2 class="process-title display-lg">
                 STEP BY <br />
                 STEP <br />
                 <span class="title-accent">WORKFLOW</span>
@@ -142,14 +142,8 @@ import CtaButton from "./CtaButton.astro";
     }
 
     .process-title {
-        font-family: "Anton", sans-serif;
-        font-size: clamp(2.5rem, 4vw + 0.5rem, 3.5rem);
-        font-weight: 400;
         color: var(--text-primary);
-        line-height: 1.15;
         margin: 0;
-        letter-spacing: 0.02em;
-        text-transform: uppercase;
     }
 
     .title-accent {
@@ -331,7 +325,7 @@ import CtaButton from "./CtaButton.astro";
     // Register globally once
     gsap.registerPlugin(ScrollTrigger);
 
-    let ctx: any; // Keep track of GSAP context
+    let ctx: any = null; // Keep track of GSAP context
 
     async function initProcessSection() {
         const section = document.getElementById("process-section");
@@ -374,11 +368,16 @@ import CtaButton from "./CtaButton.astro";
             // Animate left column elements (title, subtitle, CTA)
             const title = leftCol.querySelector(".process-title");
             const subtitle = leftCol.querySelector(".process-subtitle");
-            const ctaContainer = leftCol.querySelector(".process-cta-container");
-            const leftElements = [title, subtitle, ctaContainer].filter(Boolean);
+            const ctaContainer = leftCol.querySelector(
+                ".process-cta-container",
+            );
+            const leftElements = [title, subtitle, ctaContainer].filter(
+                Boolean,
+            );
 
             if (leftElements.length > 0) {
-                gsap.fromTo(leftElements,
+                gsap.fromTo(
+                    leftElements,
                     { y: -40, opacity: 0 },
                     {
                         y: 0,
@@ -390,14 +389,15 @@ import CtaButton from "./CtaButton.astro";
                             trigger: section,
                             start: "top 60%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Animate step cards with stagger
             if (cards.length > 0) {
-                gsap.fromTo(cards,
+                gsap.fromTo(
+                    cards,
                     { x: 50, opacity: 0 },
                     {
                         x: 0,
@@ -409,8 +409,8 @@ import CtaButton from "./CtaButton.astro";
                             trigger: section,
                             start: "top 50%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 

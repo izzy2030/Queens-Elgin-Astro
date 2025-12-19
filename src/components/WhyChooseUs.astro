@@ -13,7 +13,7 @@
                 <span class="wcu-badge-dot"></span>
                 Why Choose Us
             </span>
-            <h2 class="wcu-headline">
+            <h2 class="wcu-headline display-xl">
                 BUILDING TRUST THROUGH
                 <span class="wcu-headline-accent"
                     >EXCELLENCE & TRANSPARENCY</span
@@ -34,7 +34,7 @@
                 </div>
 
                 <div class="wcu-stat-card">
-                    <div class="wcu-stat-number">
+                    <div class="wcu-stat-number display-lg">
                         25k<span class="wcu-stat-plus">+</span>
                     </div>
                     <div class="wcu-stat-title">Happy Customers</div>
@@ -285,13 +285,7 @@
     }
 
     .wcu-headline {
-        font-family: "Anton", sans-serif;
-        font-size: clamp(2rem, 5vw + 1rem, 3.5rem);
-        font-weight: 400;
-        line-height: 1.15;
         color: #0b1121;
-        text-transform: uppercase;
-        letter-spacing: 0.02em;
     }
     :global(.dark) .wcu-headline {
         color: #ffffff;
@@ -364,9 +358,6 @@
     }
 
     .wcu-stat-number {
-        font-family: "Anton", sans-serif;
-        font-size: 3rem;
-        font-weight: 400;
         color: #0b1121;
         line-height: 1;
     }
@@ -744,10 +735,10 @@
             // Header elements
             const badge = section.querySelector(".wcu-badge");
             const headline = section.querySelector(".wcu-headline");
-            
+
             // Left column (images)
             const images = section.querySelector(".wcu-images");
-            
+
             // Right column content
             const warranty = section.querySelector(".wcu-warranty");
             const desc = section.querySelector(".wcu-desc");
@@ -756,7 +747,8 @@
 
             // Animate header (badge and headline)
             if (badge && headline) {
-                gsap.fromTo([badge, headline],
+                gsap.fromTo(
+                    [badge, headline],
                     { y: -30, opacity: 0 },
                     {
                         y: 0,
@@ -768,14 +760,15 @@
                             trigger: section,
                             start: "top 50%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Animate images column from left
             if (images) {
-                gsap.fromTo(images,
+                gsap.fromTo(
+                    images,
                     { x: -60, opacity: 0 },
                     {
                         x: 0,
@@ -786,16 +779,22 @@
                             trigger: section,
                             start: "top 45%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Animate right column content with stagger
-            const rightElements = [warranty, desc, ...Array.from(trustItems), link].filter(Boolean);
-            
+            const rightElements = [
+                warranty,
+                desc,
+                ...Array.from(trustItems),
+                link,
+            ].filter(Boolean);
+
             if (rightElements.length > 0) {
-                gsap.fromTo(rightElements,
+                gsap.fromTo(
+                    rightElements,
                     { x: 40, opacity: 0 },
                     {
                         x: 0,
@@ -807,8 +806,8 @@
                             trigger: section,
                             start: "top 40%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
         }, section);
@@ -829,4 +828,3 @@
         }
     });
 </script>
-

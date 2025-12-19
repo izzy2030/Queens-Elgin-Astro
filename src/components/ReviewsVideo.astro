@@ -38,9 +38,7 @@ const reviewCount = reviews.length;
     <div class="rv-container max-w-6xl mx-auto">
         <!-- Header -->
         <div class="text-center mb-16">
-            <h2
-                class="rv-title text-4xl md:text-5xl lg:text-6xl font-anton uppercase leading-[0.95] mb-6"
-            >
+            <h2 class="rv-title display-xl mb-6">
                 WORDS FROM OUR <span class="text-queens-secondary">CLIENTS</span
                 >
             </h2>
@@ -283,7 +281,8 @@ const reviewCount = reviews.length;
             const headerElements = [title, subtitle].filter(Boolean);
 
             if (headerElements.length > 0) {
-                gsap.fromTo(headerElements,
+                gsap.fromTo(
+                    headerElements,
                     { y: -40, opacity: 0 },
                     {
                         y: 0,
@@ -295,15 +294,16 @@ const reviewCount = reviews.length;
                             trigger: section,
                             start: "top 60%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Video card container - just fade in, the video itself has the clip-path reveal
             const videoCardForFade = section.querySelector(".rv-video-card");
             if (videoCardForFade) {
-                gsap.fromTo(videoCardForFade,
+                gsap.fromTo(
+                    videoCardForFade,
                     { opacity: 0 },
                     {
                         opacity: 1,
@@ -313,15 +313,16 @@ const reviewCount = reviews.length;
                             trigger: section,
                             start: "top 60%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Carousel container (animates whole carousel, not individual cards)
             const carouselContainer = document.getElementById("rv-carousel");
             if (carouselContainer) {
-                gsap.fromTo(carouselContainer,
+                gsap.fromTo(
+                    carouselContainer,
                     { x: 50, opacity: 0 },
                     {
                         x: 0,
@@ -332,19 +333,19 @@ const reviewCount = reviews.length;
                             trigger: section,
                             start: "top 50%",
                             once: true,
-                        }
-                    }
+                        },
+                    },
                 );
             }
 
             // Video reveal (roll down effect) - animate the video inside the card
             const reviewVideo = section.querySelector(".rv-video-reveal");
             const videoCardTrigger = section.querySelector(".rv-video-card");
-            
+
             if (reviewVideo && videoCardTrigger) {
                 // Set initial state
                 gsap.set(reviewVideo, { clipPath: "inset(0 0 100% 0)" });
-                
+
                 gsap.to(reviewVideo, {
                     clipPath: "inset(0 0 0% 0)",
                     duration: 1.2,
@@ -353,7 +354,7 @@ const reviewCount = reviews.length;
                         trigger: videoCardTrigger,
                         start: "top 70%",
                         once: true,
-                    }
+                    },
                 });
             }
         });

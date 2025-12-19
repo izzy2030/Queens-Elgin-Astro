@@ -1,8 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Boldonse&family=Yellowtail&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yellowtail&display=swap');
 
-
-
-
+@font-face {
+  font-family: 'Boldonse';
+  src: url('/fonts/boldonse-regular-webfont.woff2') format('woff2'),
+    url('/fonts/boldonse-regular-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 @font-face {
   font-family: 'Instrument Sans';

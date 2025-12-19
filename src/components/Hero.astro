@@ -52,10 +52,9 @@ const avatars = [
           Elgin's Trusted Auto Experts Since 2014
         </div>
 
-
         <!-- Headline -->
         <h1
-          class="text-5xl md:text-7xl xl:text-8xl font-anton text-queens-primary dark:text-white mb-8 leading-[0.95] tracking-tight uppercase overflow-hidden"
+          class="display-lg text-queens-primary dark:text-white mb-8 overflow-hidden"
         >
           <span class="hero-headline-line block">Your Local Expert for</span>
           <span class="hero-headline-line block text-queens-secondary pt-2"
@@ -238,11 +237,11 @@ const avatars = [
             <div class="flex items-baseline gap-1">
               <span
                 id="hero-counter"
-                class="text-5xl sm:text-6xl lg:text-7xl font-anton text-queens-primary dark:text-white tracking-tighter leading-none"
+                class="display-lg text-queens-primary dark:text-white"
                 data-target="25000">0</span
               >
               <span
-                class="text-4xl sm:text-5xl lg:text-6xl font-anton text-queens-secondary dark:text-queens-secondary-light leading-none"
+                class="display-md text-queens-secondary dark:text-queens-secondary-light"
                 >+</span
               >
             </div>
@@ -336,7 +335,6 @@ const avatars = [
   }
 </style>
 
-
 <script>
   import { gsap } from "gsap";
   import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -364,14 +362,15 @@ const avatars = [
         duration: 1.8,
         stagger: 0.4,
         ease: "power2.inOut",
-        delay: 0.5
+        delay: 0.5,
       });
     }
 
     // --- Social Proof Stagger (Using fromTo for reliability) ---
     const socialItems = document.querySelectorAll(".hero-social-item");
     if (socialItems.length > 0) {
-      gsap.fromTo(socialItems, 
+      gsap.fromTo(
+        socialItems,
         { y: 30, opacity: 0 },
         {
           y: 0,
@@ -380,8 +379,8 @@ const avatars = [
           stagger: 0.2,
           ease: "power3.out",
           delay: 1.2,
-          overwrite: "auto" // Prevents conflicts if re-run
-        }
+          overwrite: "auto", // Prevents conflicts if re-run
+        },
       );
     }
 
@@ -390,7 +389,7 @@ const avatars = [
     if (counter) {
       const target = parseInt(counter.getAttribute("data-target") || "0");
       const animation = { value: 0 };
-      
+
       gsap.to(animation, {
         value: target,
         duration: 2.5,
@@ -412,9 +411,9 @@ const avatars = [
     const heroContainer = document.querySelector(".hero-video-container");
     const heroRing = document.querySelector(".hero-video-ring");
     const notificationCard = document.querySelector(".hero-notification-card");
-    
+
     const isMobile = window.innerWidth < 1024;
-    
+
     if (heroVideo) {
       if (isMobile) {
         // Mobile: Use ScrollTrigger since video is below fold
@@ -426,11 +425,15 @@ const avatars = [
             trigger: heroVideo,
             start: "top 60%",
             once: true,
-          }
+          },
         });
 
         // Fade in overlays after video reveal on mobile
-        const mobileOverlays = [heroGradient, heroRing, notificationCard].filter(Boolean);
+        const mobileOverlays = [
+          heroGradient,
+          heroRing,
+          notificationCard,
+        ].filter(Boolean);
         mobileOverlays.forEach((el) => {
           gsap.to(el, {
             opacity: el === heroGradient ? 0.8 : 1,
@@ -440,7 +443,7 @@ const avatars = [
               trigger: heroVideo,
               start: "top 50%",
               once: true,
-            }
+            },
           });
         });
 
@@ -454,7 +457,7 @@ const avatars = [
               trigger: heroVideo,
               start: "top 50%",
               once: true,
-            }
+            },
           });
         }
       } else {
