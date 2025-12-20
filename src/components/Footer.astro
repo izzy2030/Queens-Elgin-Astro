@@ -8,7 +8,7 @@ const { brand } = Astro.props as { brand: BrandConfig };
 <footer class="site-footer">
   <div class="footer-container">
     <div class="footer-grid">
-      <!-- Column 1: Logo -->
+      <!-- Column 1: Logo + About Text + Socials -->
       <div class="footer-col">
         <a href="/" class="footer-logo">
           {
@@ -23,6 +23,57 @@ const { brand } = Astro.props as { brand: BrandConfig };
             )
           }
         </a>
+        <p class="footer-about">
+          Elgin's trusted auto shop since 2007. Quality repairs, honest pricing,
+          and service that keeps you rolling.
+        </p>
+        <!-- Social Icons -->
+        <div class="footer-socials">
+          <a
+            href="https://www.youtube.com/@queenselgin4206"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <img
+              src="/images/social/youtube.svg"
+              alt="YouTube"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=61575036973222"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Facebook"
+          >
+            <img
+              src="/images/social/facebook.svg"
+              alt="Facebook"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://www.instagram.com/queensautoserviceelgin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <img
+              src="/images/social/instagram.svg"
+              alt="Instagram"
+              class="social-icon"
+            />
+          </a>
+          <a
+            href="https://x.com/queensautoelgin"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="X (Twitter)"
+          >
+            <img src="/images/social/x.svg" alt="X" class="social-icon" />
+          </a>
+        </div>
       </div>
 
       <!-- Column 2: Services -->
@@ -308,6 +359,48 @@ const { brand } = Astro.props as { brand: BrandConfig };
     color: #0a79c8;
     font-weight: 700;
     font-size: 1.5rem;
+  }
+
+  .footer-about {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    max-width: 280px;
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.25rem;
+  }
+
+  .footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+  }
+
+  .footer-socials a:hover {
+    background: #0a79c8;
+    transform: translateY(-2px);
+  }
+
+  .social-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    filter: brightness(0) saturate(100%) invert(70%) sepia(5%) saturate(400%)
+      hue-rotate(180deg);
+    transition: filter 0.3s ease;
+  }
+
+  .footer-socials a:hover .social-icon {
+    filter: brightness(0) invert(1);
   }
 
   .footer-heading {
