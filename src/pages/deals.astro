@@ -75,10 +75,10 @@ const deals = [
     <div class="pt-36 pb-24 sm:pt-48 sm:pb-32">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
             <div class="mx-auto max-w-2xl text-center">
-                <h1 class="display-xl text-queens-primary dark:text-white">
+                <h1 class="display-xl text-queens-primary dark:text-white hero-title">
                     Current Deals
                 </h1>
-                <p class="mt-2 paragraph-1 text-gray-600 dark:text-gray-300">
+                <p class="mt-2 paragraph-1 text-gray-600 dark:text-gray-300 hero-subtitle">
                     Save on your next service with our exclusive offers.
                 </p>
             </div>
@@ -94,7 +94,7 @@ const deals = [
                 >
                     {
                         deals.map((deal, index) => (
-                        <div class="service-card-item glow-beam-hover flex flex-col rounded-[2.5rem] p-10 shadow-xl dark:shadow-black/40 backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:shadow-queens-secondary/20 hover:scale-[1.02] text-center h-full bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 group">
+                        <div class="deal-card service-card-item glow-beam-hover flex flex-col rounded-[2.5rem] p-10 shadow-xl dark:shadow-black/40 backdrop-blur-sm transition-all duration-500 hover:shadow-2xl hover:shadow-queens-secondary/20 hover:scale-[1.02] text-center h-full bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 group">
                                 <p class="font-serif italic text-2xl text-queens-secondary mb-2 tracking-tight">
                                     {deal.subtitle}
                                 </p>
@@ -132,4 +132,63 @@ const deals = [
             </div>
         </div>
     </div>
+
+    <script>
+        import gsap from "gsap";
+        import ScrollTrigger from "gsap/ScrollTrigger";
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        function initDealsAnimations() {
+            // Hero title animation
+            gsap.to(".hero-title", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.1,
+            });
+
+            // Hero subtitle animation
+            gsap.to(".hero-subtitle", {
+                opacity: 1,
+                y: 0,
+                duration: 0.8,
+                ease: "power3.out",
+                delay: 0.25,
+            });
+
+            // Deal cards - staggered scroll animation
+            ScrollTrigger.batch(".deal-card", {
+                start: "top 88%",
+                once: true,
+                onEnter: (batch) => {
+                    gsap.to(batch, {
+                        opacity: 1,
+                        y: 0,
+                        scale: 1,
+                        duration: 0.7,
+                        stagger: 0.1,
+                        ease: "back.out(1.2)",
+                    });
+                },
+            });
+        }
+
+        document.addEventListener("astro:page-load", initDealsAnimations);
+    </script>
 </BaseLayout>
+
+<style>
+    /* Animation initial states */
+    .hero-title,
+    .hero-subtitle {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    .deal-card {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+</style>
