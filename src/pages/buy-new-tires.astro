@@ -12,25 +12,31 @@ import CtaButton from "../components/CtaButton.astro";
       <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <!-- Left: Content -->
         <div class="hero-content">
-          <h1 class="display-lg text-queens-primary dark:text-white mb-6">
+          <h1
+            class="display-lg text-queens-primary dark:text-white mb-6 hero-anim"
+          >
             Find Great <span class="text-queens-secondary">Deals On Tires</span
             >.<br />
             Shop Local!
           </h1>
           <p
-            class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed"
+            class="text-lg text-gray-600 dark:text-gray-300 mb-8 max-w-lg leading-relaxed hero-anim"
           >
             Buy tires online and get them installed at our <strong
               >local tire shop</strong
             >. We have a great selection of new tires from the most popular
             brands.
           </p>
-          <CtaButton href="#tire-search" text="Shop For Tires Now" />
+          <div class="hero-anim">
+            <CtaButton href="#tire-search" text="Shop For Tires Now" />
+          </div>
         </div>
 
         <!-- Right: Video -->
-        <div class="relative reveal delay-200">
-          <div class="video-container rounded-2xl overflow-hidden shadow-2xl">
+        <div class="relative">
+          <div
+            class="video-container video-reveal rounded-2xl overflow-hidden shadow-2xl"
+          >
             <script is:inline src="https://fast.wistia.com/player.js" async
             ></script>
             <script
@@ -56,7 +62,7 @@ import CtaButton from "../components/CtaButton.astro";
   </section>
 
   <!-- Promo Banner -->
-  <section class="promo-banner bg-queens-secondary py-6 md:py-8 reveal">
+  <section class="promo-banner bg-queens-secondary py-6 md:py-8 promo-anim">
     <div class="site-canvas">
       <div
         class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-center md:text-left"
@@ -94,12 +100,12 @@ import CtaButton from "../components/CtaButton.astro";
   <section id="tire-search" class="tire-search-section py-16 md:py-24">
     <div class="site-canvas">
       <div class="text-center mb-12">
-        <h2 class="display-md text-queens-primary dark:text-white mb-4 reveal">
+        <h2 class="display-md text-queens-primary dark:text-white mb-4">
           Search by Brand<br />or Tire Size
         </h2>
       </div>
 
-      <div class="max-w-xl mx-auto reveal">
+      <div class="max-w-xl mx-auto search-anim">
         <div
           class="tire-widget-wrapper bg-white dark:bg-gray-900 rounded-2xl shadow-2xl p-6 md:p-8 border border-gray-100 dark:border-white/10"
         >
@@ -117,17 +123,17 @@ import CtaButton from "../components/CtaButton.astro";
   <section class="process-section py-16 md:py-24 bg-gray-50 dark:bg-white/5">
     <div class="site-canvas">
       <div class="text-center mb-14">
-        <h2 class="display-md text-queens-primary dark:text-white mb-3 reveal">
+        <h2 class="display-md text-queens-primary dark:text-white mb-3">
           Finding Great Tire Deals
         </h2>
-        <p class="text-gray-600 dark:text-gray-400 text-lg reveal">
+        <p class="text-gray-600 dark:text-gray-400 text-lg">
           Has Never Been Easier
         </p>
       </div>
 
       <div class="process-cards-wrapper">
         <!-- Step 1 -->
-        <div class="process-card reveal stagger-item">
+        <div class="process-card card-anim">
           <div
             class="process-icon bg-queens-secondary/10 text-queens-secondary"
           >
@@ -156,7 +162,7 @@ import CtaButton from "../components/CtaButton.astro";
         </div>
 
         <!-- Step 2 -->
-        <div class="process-card reveal stagger-item">
+        <div class="process-card card-anim">
           <div
             class="process-icon bg-queens-secondary/10 text-queens-secondary"
           >
@@ -182,7 +188,7 @@ import CtaButton from "../components/CtaButton.astro";
         </div>
 
         <!-- Step 3 -->
-        <div class="process-card reveal stagger-item">
+        <div class="process-card card-anim">
           <div
             class="process-icon bg-queens-secondary/10 text-queens-secondary"
           >
@@ -208,7 +214,7 @@ import CtaButton from "../components/CtaButton.astro";
         </div>
 
         <!-- Step 4 -->
-        <div class="process-card reveal stagger-item">
+        <div class="process-card card-anim">
           <div
             class="process-icon bg-queens-secondary/10 text-queens-secondary"
           >
@@ -243,28 +249,74 @@ import CtaButton from "../components/CtaButton.astro";
     gsap.registerPlugin(ScrollTrigger);
 
     function initAnimations() {
-      // Set initial states IMMEDIATELY to prevent flash
-      gsap.set(".hero-content > *", { opacity: 1, x: 0 });
-      gsap.set(".reveal", { opacity: 1, y: 0 });
-      gsap.set(".stagger-item", { opacity: 1, scale: 1 });
+      // Hero content - animate in on page load
+      const heroItems = document.querySelectorAll(".hero-anim");
+      if (heroItems.length) {
+        gsap.to(heroItems, {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out",
+          delay: 0.1,
+        });
+      }
 
-      // Simple scroll-triggered fade for process cards
-      ScrollTrigger.batch(".stagger-item", {
-        start: "top 85%",
-        onEnter: (elements) => {
-          gsap.fromTo(
-            elements,
-            { y: 30, opacity: 0.5 },
-            {
-              y: 0,
-              opacity: 1,
-              duration: 0.6,
-              stagger: 0.15,
-              ease: "power2.out",
-            },
-          );
-        },
+      // Video reveal from top (like homepage hero)
+      const videoReveal = document.querySelector(".video-reveal");
+      if (videoReveal) {
+        gsap.to(videoReveal, {
+          clipPath: "inset(0 0 0% 0)",
+          duration: 1.2,
+          ease: "power2.out",
+          delay: 0.4,
+        });
+      }
+
+      // Promo banner - animate on scroll
+      ScrollTrigger.create({
+        trigger: ".promo-anim",
+        start: "top 90%",
         once: true,
+        onEnter: () => {
+          gsap.to(".promo-anim", {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            ease: "power2.out",
+          });
+        },
+      });
+
+      // Tire search section
+      ScrollTrigger.create({
+        trigger: ".search-anim",
+        start: "top 85%",
+        once: true,
+        onEnter: () => {
+          gsap.to(".search-anim", {
+            opacity: 1,
+            y: 0,
+            duration: 0.7,
+            ease: "power2.out",
+          });
+        },
+      });
+
+      // Process cards - staggered scroll animation
+      ScrollTrigger.batch(".card-anim", {
+        start: "top 88%",
+        once: true,
+        onEnter: (batch) => {
+          gsap.to(batch, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            stagger: 0.12,
+            ease: "back.out(1.4)",
+          });
+        },
       });
     }
 
@@ -397,5 +449,30 @@ import CtaButton from "../components/CtaButton.astro";
     font-size: 0.875rem;
     color: var(--text-secondary);
     line-height: 1.6;
+  }
+
+  /* Animation initial states - hidden until GSAP animates them in */
+  .hero-anim {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .video-reveal {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  .promo-anim {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .search-anim {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  .card-anim {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
   }
 </style>
