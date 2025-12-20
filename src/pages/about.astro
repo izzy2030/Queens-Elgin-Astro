@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SmoothReveal from "../components/SmoothReveal.astro";
+import CtaButton from "../components/CtaButton.astro";
+import CtaButtonSecondary from "../components/CtaButtonSecondary.astro";
 ---
 
 <BaseLayout
@@ -40,15 +42,25 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                 <div
                     class="relative aspect-video rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-white/10"
                 >
-                    <iframe
-                        class="absolute inset-0 w-full h-full"
-                        src="https://www.youtube.com/embed/WFIqBH0-qU0?rel=0&modestbranding=1"
-                        title="Queens Auto Services"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                    >
-                    </iframe>
+                    <script src="https://fast.wistia.com/player.js" async
+                    ></script>
+                    <script
+                        src="https://fast.wistia.com/embed/yfibgnnqeg.js"
+                        async
+                        type="module"></script>
+                    <style>
+                        wistia-player[media-id="yfibgnnqeg"]:not(:defined) {
+                            background: center / contain no-repeat
+                                url("https://fast.wistia.com/embed/medias/yfibgnnqeg/swatch");
+                            display: block;
+                            filter: blur(5px);
+                            padding-top: 56.25%;
+                        }
+                    </style>
+                    <wistia-player
+                        media-id="yfibgnnqeg"
+                        aspect="1.7777777777777777"
+                        class="absolute inset-0 w-full h-full"></wistia-player>
                 </div>
             </div>
         </div>
@@ -177,7 +189,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                         >
                     </div>
                     <h3
-                        class="text-xl font-bold text-queens-primary dark:text-white mb-3"
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
                     >
                         Honest Service
                     </h3>
@@ -208,7 +220,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                         >
                     </div>
                     <h3
-                        class="text-xl font-bold text-queens-primary dark:text-white mb-3"
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
                     >
                         Quality Work
                     </h3>
@@ -246,7 +258,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                         >
                     </div>
                     <h3
-                        class="text-xl font-bold text-queens-primary dark:text-white mb-3"
+                        class="value-card-title font-bold text-queens-primary dark:text-white mb-3"
                     >
                         Community First
                     </h3>
@@ -269,7 +281,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
             >
                 <div>
                     <div class="text-4xl md:text-5xl font-bold text-white mb-2">
-                        10+
+                        <span class="stat-counter" data-target="18">0</span>+
                     </div>
                     <div
                         class="text-white/60 text-sm uppercase tracking-widest"
@@ -279,7 +291,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                 </div>
                 <div>
                     <div class="text-4xl md:text-5xl font-bold text-white mb-2">
-                        5K+
+                        <span class="stat-counter" data-target="25">0</span>K+
                     </div>
                     <div
                         class="text-white/60 text-sm uppercase tracking-widest"
@@ -289,7 +301,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                 </div>
                 <div>
                     <div class="text-4xl md:text-5xl font-bold text-white mb-2">
-                        50+
+                        <span class="stat-counter" data-target="50">0</span>+
                     </div>
                     <div
                         class="text-white/60 text-sm uppercase tracking-widest"
@@ -299,7 +311,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                 </div>
                 <div>
                     <div class="text-4xl md:text-5xl font-bold text-white mb-2">
-                        100%
+                        <span class="stat-counter" data-target="100">0</span>%
                     </div>
                     <div
                         class="text-white/60 text-sm uppercase tracking-widest"
@@ -334,7 +346,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                             >
                             <span
                                 class="font-semibold text-queens-primary dark:text-white"
-                                >8:00 AM - 6:00 PM</span
+                                >7:30 AM - 6:00 PM</span
                             >
                         </div>
                         <div
@@ -345,7 +357,7 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                             >
                             <span
                                 class="font-semibold text-queens-primary dark:text-white"
-                                >8:00 AM - 4:00 PM</span
+                                >7:30 AM - 4:00 PM</span
                             >
                         </div>
                         <div class="flex justify-between py-3">
@@ -362,34 +374,42 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                     class="bg-queens-secondary rounded-2xl p-8 md:p-10 text-white"
                     data-reveal-item
                 >
-                    <h3 class="text-2xl font-bold mb-8">Visit Us</h3>
+                    <h3 class="text-2xl font-bold mb-8 text-white">Visit Us</h3>
                     <div class="space-y-6">
                         <div>
-                            <p class="text-white/60 text-sm mb-1">Address</p>
-                            <p class="text-lg font-medium">
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Address
+                            </p>
+                            <p class="text-lg font-medium text-white">
                                 1303 Dundee Ave, Elgin, IL 60120
                             </p>
                         </div>
                         <div>
-                            <p class="text-white/60 text-sm mb-1">Phone</p>
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Phone
+                            </p>
                             <a
                                 href="tel:2246353000"
-                                class="text-lg font-medium hover:underline"
+                                class="text-lg font-medium text-white hover:underline"
                                 >(224) 635-3000</a
                             >
                         </div>
                         <div>
-                            <p class="text-white/60 text-sm mb-1">Email</p>
+                            <p class="text-white text-sm mb-1 opacity-90">
+                                Email
+                            </p>
                             <a
                                 href="mailto:info@queensautoservices.com"
-                                class="text-lg font-medium hover:underline"
+                                class="text-lg font-medium text-white hover:underline"
                                 >info@queensautoservices.com</a
                             >
                         </div>
                     </div>
                     <div class="mt-8 pt-6 border-t border-white/20">
                         <a
-                            href="/contact"
+                            href="https://maps.app.goo.gl/piDCuk2RaWeGzLY76"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             class="inline-flex items-center gap-2 text-white font-semibold hover:gap-3 transition-all"
                         >
                             Get Directions
@@ -424,13 +444,54 @@ import SmoothReveal from "../components/SmoothReveal.astro";
                     Whether you need routine maintenance or a major repair, our
                     team is ready to help. Schedule your appointment today.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="/request-an-appointment" class="btn-primary"
-                        >Book Appointment</a
-                    >
-                    <a href="/services" class="btn-secondary">View Services</a>
+                <div
+                    class="flex flex-col sm:flex-row gap-5 justify-center mt-4"
+                >
+                    <CtaButton
+                        href="/request-an-appointment"
+                        text="Book Appointment"
+                    />
+                    <CtaButtonSecondary href="/services" text="View Services" />
                 </div>
             </div>
         </div>
     </section>
 </BaseLayout>
+
+<script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initCounters() {
+        const counters = document.querySelectorAll(".stat-counter");
+
+        counters.forEach((counter) => {
+            const target = parseInt(counter.getAttribute("data-target") || "0");
+            const obj = { value: 0 };
+
+            gsap.to(obj, {
+                value: target,
+                duration: 2,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: counter,
+                    start: "top 90%",
+                    once: true,
+                },
+                onUpdate: () => {
+                    if (counter instanceof HTMLElement) {
+                        counter.innerText = Math.ceil(obj.value).toString();
+                    }
+                },
+            });
+        });
+    }
+
+    // Run on page load
+    initCounters();
+
+    // Re-run on view transitions if using Astro transitions
+    document.addEventListener("astro:after-swap", initCounters);
+</script>

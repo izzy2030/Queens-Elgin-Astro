@@ -399,6 +399,18 @@ div {
     color: inherit;
 }
 
+/* Value Card Titles - used to override large global h3 */
+.value-card-title {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+}
+
+@media (min-width: 1024px) {
+    .value-card-title {
+        font-size: 2rem !important;
+    }
+}
+
 /* Body text defaults */
 p {
     color: var(--text-secondary);
