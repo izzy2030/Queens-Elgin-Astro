@@ -1,0 +1,123 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SmoothReveal from "../components/SmoothReveal.astro";
+import CtaButton from "../components/CtaButton.astro";
+
+const title = "Thank You | Queens Auto Service";
+const description =
+    "Your message has been received. We will get back to you shortly.";
+---
+
+<BaseLayout title={title} description={description}>
+    <SmoothReveal />
+
+    <section
+        class="relative min-h-[80vh] flex items-center justify-center pt-20 pb-20 overflow-hidden"
+    >
+        <!-- Background Elements -->
+        <div class="absolute inset-0 pointer-events-none">
+            <div
+                class="absolute top-1/4 left-1/4 w-96 h-96 bg-queens-secondary/10 rounded-full blur-[100px] animate-pulse"
+            >
+            </div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-queens-primary/5 rounded-full blur-[100px] animate-pulse"
+                style="animation-delay: 2s;"
+            >
+            </div>
+        </div>
+
+        <div class="site-canvas relative z-10 text-center" data-reveal>
+            <div class="max-w-2xl mx-auto" data-reveal-item>
+                <!-- Success Icon -->
+                <div
+                    class="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-500/10 text-green-500 mb-8 border border-green-500/20"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="w-10 h-10"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                    >
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+
+                <h1
+                    class="display-hero-page text-queens-primary dark:text-white mb-6"
+                >
+                    We've Got Your <span class="text-queens-secondary"
+                        >Message!</span
+                    >
+                </h1>
+
+                <p
+                    class="text-xl text-gray-600 dark:text-gray-300 mb-12 leading-relaxed"
+                >
+                    Thank you for reaching out to Queens Auto Service. A member
+                    of our team has been notified and will review your request
+                    shortly.
+                    <br class="hidden sm:block" />
+                    We typically respond within 1-2 business hours.
+                </p>
+
+                <div
+                    class="p-8 bg-white dark:bg-white/5 rounded-3xl border border-gray-100 dark:border-white/10 shadow-xl mb-12"
+                >
+                    <h2
+                        class="text-lg font-bold text-queens-primary dark:text-white mb-4 uppercase tracking-wider"
+                    >
+                        What's Next?
+                    </h2>
+                    <ul class="text-left space-y-4 max-w-md mx-auto">
+                        <li class="flex items-start gap-3">
+                            <span
+                                class="flex-shrink-0 w-6 h-6 rounded-full bg-queens-secondary/20 text-queens-secondary flex items-center justify-center text-xs font-bold"
+                                >1</span
+                            >
+                            <span class="text-gray-600 dark:text-gray-400"
+                                ><strong>Review:</strong> Our service advisor will
+                                check our schedule and your details.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span
+                                class="flex-shrink-0 w-6 h-6 rounded-full bg-queens-secondary/20 text-queens-secondary flex items-center justify-center text-xs font-bold"
+                                >2</span
+                            >
+                            <span class="text-gray-600 dark:text-gray-400"
+                                ><strong>Contact:</strong> We'll call or text you
+                                to confirm your appointment time.</span
+                            >
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span
+                                class="flex-shrink-0 w-6 h-6 rounded-full bg-queens-secondary/20 text-queens-secondary flex items-center justify-center text-xs font-bold"
+                                >3</span
+                            >
+                            <span class="text-gray-600 dark:text-gray-400"
+                                ><strong>Service:</strong> We'll see you at the shop
+                                (or your location) to get you squared away.</span
+                            >
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <CtaButton href="/" text="Back to Home" />
+                    <a
+                        href="tel:2246353000"
+                        class="inline-flex items-center justify-center px-8 py-4 text-lg font-bold text-queens-primary dark:text-white border-2 border-queens-primary/10 dark:border-white/10 rounded-full hover:bg-gray-50 dark:hover:bg-white/5 transition-all"
+                    >
+                        Questions? Call Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</BaseLayout>

@@ -2,9 +2,9 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { mobileTiresBrand } from "../brands";
 
-const title = "Request an Appointment | Queens Mobile Tires";
+const title = "Request an Appointment | Queens Auto Service";
 const description =
-    "Schedule your mobile tire or auto repair service with Queens Mobile Tires.";
+    "Schedule your auto repair or tire service with Queens Auto Service in Elgin, IL.";
 ---
 
 <BaseLayout brand={mobileTiresBrand} title={title}>
@@ -1153,7 +1153,8 @@ const description =
                     console.error("Webhook Fetch Error:", error);
                 } finally {
                     const thankYouUrl = new URL(
-                        "https://queensautoserviceselgin.com/auto-repair/thank-you.htm" +
+                        window.location.origin +
+                            "/thank-you" +
                             window.location.search,
                     );
                     for (const key in webhookData) {
