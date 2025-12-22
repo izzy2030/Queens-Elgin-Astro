@@ -4,22 +4,7 @@
  * Refactored with clean code to fix Chrome rendering issue
  */
 
-const reviews = [
-    {
-        name: "Luis Subias",
-        role: "Verified Customer",
-        stars: 5,
-        text: "Came in to patch up a flat tire with a nail. They took me in as a walk in and fixed it super fast. Exceptional customer service!",
-        image: "/images/reviewers/Kevin Moncada.webp",
-    },
-    {
-        name: "Mike Abene III",
-        role: "Verified Customer",
-        stars: 5,
-        text: "Brought my 30ft RV to have 6 tires mounted... Great hospitable group of people working there from top to bottom.",
-        image: "/images/reviewers/Chris Muller.webp",
-    },
-];
+import reviews from "../data/reviews.json";
 
 const getInitials = (name: string) =>
     name

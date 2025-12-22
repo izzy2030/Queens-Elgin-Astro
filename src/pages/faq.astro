@@ -71,29 +71,13 @@ const faqs = [
       "Absolutely! We offer fleet services for businesses. Contact us directly to discuss your fleet needs and we can set up a customized service plan for your company.",
   },
 ];
-
-// Generate FAQ Schema
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer.replace(/<[^>]*>/g, ""), // Strip HTML for schema
-    },
-  })),
-};
 ---
 
 <BaseLayout
-  title="FAQ | Queens Mobile Tires"
-  description="Find answers to frequently asked questions about Queens Mobile Tires mobile tire installation service, payments, scheduling, and more."
+  title="FAQ | Queens Auto Service"
+  description="Find answers to frequently asked questions about Queens Auto Service in Elgin, IL. Learn about our services, payments, scheduling, and more."
+  faqData={faqs}
 >
-  <!-- FAQ Schema -->
-  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-
   <!-- Hero Section -->
   <section class="relative py-20 lg:py-28 overflow-hidden">
     <!-- Decorative Elements -->

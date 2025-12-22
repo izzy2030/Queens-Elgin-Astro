@@ -77,7 +77,14 @@ const serviceFaqs = [
 ];
 ---
 
-<BaseLayout brand={mobileTiresBrand} title={title} headerInverse={true}>
+<BaseLayout
+    brand={mobileTiresBrand}
+    title={title}
+    description={description}
+    headerInverse={true}
+    serviceData={service}
+    faqData={serviceFaqs}
+>
     <!-- Hero Section - Full Width Background with slight inset, Contained Content -->
     <div class="px-1 pt-[3px]">
         <div

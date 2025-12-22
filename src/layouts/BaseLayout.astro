@@ -8,6 +8,7 @@ import ServicesHeader from "../components/ServicesHeader.astro";
 import Footer from "../components/Footer.astro";
 import MobileStickyCTA from "../components/MobileStickyCTA.astro";
 import SmoothScroll from "../components/SmoothScroll.astro";
+import Schema from "../components/SEO/Schema.astro";
 import type { BrandConfig } from "../brands";
 import { mobileTiresBrand } from "../brands";
 
@@ -16,6 +17,8 @@ const {
   description = "We come to you.",
   brand: propBrand,
   headerInverse = false,
+  serviceData,
+  faqData,
 } = Astro.props;
 
 // Use provided brand or default to mobile tires brand
@@ -59,6 +62,13 @@ const isServiceSubPage =
     <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
 
     <title>{title}</title>
+    <Schema
+      brand={brand}
+      title={title}
+      description={description}
+      serviceData={serviceData}
+      faqData={faqData}
+    />
     <ViewTransitions />
     <script is:inline>
       const applyTheme = () => {

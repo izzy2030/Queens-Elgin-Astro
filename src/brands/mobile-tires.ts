@@ -12,5 +12,5 @@ export const mobileTiresBrand: BrandConfig = {
     email: "info@queensautoserviceselgin.com",
     address: "1303 Dundee Ave, Elgin, IL 60120",
     cityLabel: "Professional Auto Service – Elgin, IL",
-    googleMapsUrl: "https://maps.google.com/?q=2401+E+Algonquin+Rd,+Lake+in+the+Hills,+IL+60102",
+    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=1303+Dundee+Ave+Elgin+IL+60120",
 };
