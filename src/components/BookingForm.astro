@@ -296,12 +296,12 @@ const {
         left: 25%;
         right: 25%;
         height: 2px;
-        background: rgba(15, 23, 42, 0.1);
+        background: #cbd5e1; /* slate-300 - visible in light mode */
         z-index: 0;
     }
 
     .dark .stepper-line {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.2);
     }
 
     .stepper-line-active {
@@ -319,7 +319,7 @@ const {
         height: 2rem;
         border-radius: 9999px;
         background-color: white;
-        border: 2px solid rgba(15, 23, 42, 0.15);
+        border: 2px solid #cbd5e1; /* slate-300 - visible border */
         display: flex;
         align-items: center;
         justify-content: center;
@@ -329,14 +329,18 @@ const {
     }
 
     .dark .step-node {
-        background-color: rgba(30, 41, 59, 1);
-        border-color: rgba(100, 116, 139, 0.5);
+        background-color: #1e293b; /* slate-800 */
+        border-color: #475569; /* slate-600 */
     }
 
     .step-node.active {
         border-color: #0a79c8;
         background-color: #0a79c8;
-        box-shadow: 0 0 12px rgba(10, 121, 200, 0.4);
+        box-shadow: 0 0 0 4px rgba(10, 121, 200, 0.2);
+    }
+
+    .dark .step-node.active {
+        box-shadow: 0 0 12px rgba(10, 121, 200, 0.5);
     }
 
     .step-node.completed {
@@ -348,12 +352,12 @@ const {
         width: 0.5rem;
         height: 0.5rem;
         border-radius: 9999px;
-        background-color: rgba(15, 23, 42, 0.2);
+        background-color: #94a3b8; /* slate-400 - visible inner dot */
         transition: all 0.3s ease;
     }
 
     .dark .step-node-inner {
-        background-color: rgba(148, 163, 184, 0.4);
+        background-color: #64748b; /* slate-500 */
     }
 
     .active .step-node-inner,
@@ -437,26 +441,18 @@ const {
                         <div class="glow-beam"></div>
                     </div>
 
-                    <!-- Stepper -->
-                    <div class="stepper-container">
-                        <div class="stepper-line"></div>
-                        <div
-                            id="stepper-progress-line"
-                            class="stepper-line-active"
-                            style="width: 0%;"
-                        >
+                    <!-- Progress Steps -->
+                    <div class="progress-steps">
+                        <div class="progress-track">
+                            <div class="progress-bar" id="stepper-progress-bar">
+                            </div>
                         </div>
-                        <div class="step-node active" id="node-1">
-                            <div class="step-node-inner"></div>
-                            <span class="step-label">Step 1</span>
-                        </div>
-                        <div class="step-node" id="node-2">
-                            <div class="step-node-inner"></div>
-                            <span class="step-label">Step 2</span>
-                        </div>
-                        <div class="step-node" id="node-3">
-                            <div class="step-node-inner"></div>
-                            <span class="step-label">Step 3</span>
+                        <div class="steps-container">
+                            <div class="step active" data-step="1">
+                                <span>1</span>
+                            </div>
+                            <div class="step" data-step="2"><span>2</span></div>
+                            <div class="step" data-step="3"><span>3</span></div>
                         </div>
                     </div>
                 </div>
@@ -1252,6 +1248,49 @@ const {
         const step2NextBtn = document.getElementById("step2-next-btn");
         const step2BackBtn = document.getElementById("step2-back-btn");
         const backBtn = document.getElementById("back-btn");
+
+        // --- Progress Stepper Update Function ---
+        const progressBar = document.getElementById("stepper-progress-bar");
+        const stepElements = document.querySelectorAll(".progress-steps .step");
+        const totalSteps = stepElements.length;
+
+        const updateProgressStepper = (currentStep) => {
+            console.log(
+                "[Stepper Debug] updateProgressStepper called with step:",
+                currentStep,
+            );
+
+            // Update progress bar width
+            const progressPercent =
+                ((currentStep - 1) / (totalSteps - 1)) * 100;
+            console.log("[Stepper Debug] progressPercent:", progressPercent);
+
+            if (progressBar) {
+                progressBar.style.width = `${progressPercent}%`;
+                console.log(
+                    "[Stepper Debug] Set progress bar width to:",
+                    progressPercent + "%",
+                );
+            } else {
+                console.log("[Stepper Debug] progressBar is null!");
+            }
+
+            // Update step circles
+            stepElements.forEach((stepEl, index) => {
+                const stepNum = index + 1;
+                stepEl.classList.remove("active", "completed");
+
+                if (stepNum < currentStep) {
+                    stepEl.classList.add("completed");
+                } else if (stepNum === currentStep) {
+                    stepEl.classList.add("active");
+                }
+            });
+            console.log("[Stepper Debug] Updated step classes");
+        };
+
+        // Initialize stepper to step 1
+        updateProgressStepper(1);
         const submitBtn = document.getElementById("submit-btn");
         let calendarDate = new Date();
         const monthYearEl = document.getElementById("month-year");
@@ -1390,11 +1429,30 @@ const {
 
         if (nextBtn) {
             nextBtn.addEventListener("click", () => {
+                console.log(
+                    "[Stepper Debug] nextBtn clicked - transitioning to step 2",
+                );
                 step1.classList.add("hidden");
                 step2.classList.remove("hidden");
-                formInstruction.textContent =
-                    formWrapper.dataset.step2desc ||
-                    "Step 2 of 3 — What service does your vehicle need?";
+                if (formInstruction) {
+                    formInstruction.textContent =
+                        formWrapper.dataset.step2desc ||
+                        "Step 2 of 3 — What service does your vehicle need?";
+                }
+                try {
+                    console.log(
+                        "[Stepper Debug] About to call updateProgressStepper(2)",
+                    );
+                    updateProgressStepper(2);
+                    console.log(
+                        "[Stepper Debug] updateProgressStepper(2) completed",
+                    );
+                } catch (error) {
+                    console.error(
+                        "[Stepper Debug] ERROR calling updateProgressStepper:",
+                        error,
+                    );
+                }
                 smoothScrollToForm();
             });
         }
@@ -1403,9 +1461,12 @@ const {
             step2NextBtn.addEventListener("click", () => {
                 step2.classList.add("hidden");
                 step3.classList.remove("hidden");
-                formInstruction.textContent =
-                    formWrapper.dataset.step3desc ||
-                    "Step 3 of 3 — When can you bring it in?";
+                if (formInstruction) {
+                    formInstruction.textContent =
+                        formWrapper.dataset.step3desc ||
+                        "Step 3 of 3 — When can you bring it in?";
+                }
+                updateProgressStepper(3);
                 smoothScrollToForm();
             });
         }
@@ -1414,9 +1475,12 @@ const {
             step2BackBtn.addEventListener("click", () => {
                 step2.classList.add("hidden");
                 step1.classList.remove("hidden");
-                formInstruction.textContent =
-                    formWrapper.dataset.step1desc ||
-                    "Step 1 of 3 — Your contact and vehicle details.";
+                if (formInstruction) {
+                    formInstruction.textContent =
+                        formWrapper.dataset.step1desc ||
+                        "Step 1 of 3 — Your contact and vehicle details.";
+                }
+                updateProgressStepper(1);
                 smoothScrollToForm();
             });
         }
@@ -1425,9 +1489,12 @@ const {
             backBtn.addEventListener("click", () => {
                 step3.classList.add("hidden");
                 step2.classList.remove("hidden");
-                formInstruction.textContent =
-                    formWrapper.dataset.step2desc ||
-                    "Step 2 of 3 — What service does your vehicle need?";
+                if (formInstruction) {
+                    formInstruction.textContent =
+                        formWrapper.dataset.step2desc ||
+                        "Step 2 of 3 — What service does your vehicle need?";
+                }
+                updateProgressStepper(2);
                 smoothScrollToForm();
             });
         }

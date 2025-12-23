@@ -1399,3 +1399,201 @@ details.group>div:where(.dark, .dark *) {
 .glow-beam-hover:nth-child(9):hover .glow-beam-sm::after {
     animation-delay: 1.2s;
 }
+
+/* ========================================
+   BOOKING FORM PROGRESS STEPS
+   Clean multi-step progress indicator
+   Numbers inside circles, border-based active state
+   ======================================== */
+.progress-steps {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 280px !important;
+    margin: 0 auto 1.5rem !important;
+}
+
+.progress-steps .progress-track {
+    width: 100% !important;
+    height: 3px !important;
+    background-color: #e0e0e0 !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    transform: translateY(-50%) !important;
+    z-index: 0 !important;
+}
+
+.dark .progress-steps .progress-track {
+    background-color: #475569 !important;
+}
+
+.progress-steps .progress-bar {
+    position: absolute !important;
+    width: 0% !important;
+    height: 100% !important;
+    left: 0 !important;
+    top: 0 !important;
+    background: var(--color-queens-secondary, #0a79c8) !important;
+    transition: width 0.5s ease !important;
+}
+
+.progress-steps .steps-container {
+    display: flex !important;
+    justify-content: space-between !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+.progress-steps .step {
+    width: 36px !important;
+    height: 36px !important;
+    border-radius: 50% !important;
+    background-color: white !important;
+    border: 3px solid #e0e0e0 !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: pointer !important;
+    transition: border-color 0.3s ease, background-color 0.3s ease !important;
+}
+
+.progress-steps .step span {
+    font-weight: 600 !important;
+    font-size: 0.875rem !important;
+    color: #94a3b8 !important;
+    transition: color 0.3s ease !important;
+}
+
+.dark .progress-steps .step {
+    background-color: #1e293b !important;
+    border-color: #475569 !important;
+}
+
+.dark .progress-steps .step span {
+    color: #64748b !important;
+}
+
+.progress-steps .step.active {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.progress-steps .step.active span {
+    color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.dark .progress-steps .step.active {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.progress-steps .step.completed {
+    border-color: var(--color-queens-secondary, #0a79c8) !important;
+    background-color: var(--color-queens-secondary, #0a79c8) !important;
+}
+
+.progress-steps .step.completed span {
+    color: white !important;
+}
+
+/* Hide old stepper elements */
+.stepper-container {
+    display: none !important;
+}
+
+/* Connecting line using ::before pseudo element */
+.stepper-container::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 3px !important;
+    background: #cbd5e1 !important;
+    transform: translateY(-50%) !important;
+    z-index: 0 !important;
+}
+
+.dark .stepper-container::before {
+    background: #475569 !important;
+}
+
+.stepper-line,
+.dark .stepper-line,
+.stepper-line-active {
+    display: none !important;
+}
+
+.step-node {
+    width: 2rem !important;
+    height: 2rem !important;
+    border-radius: 50% !important;
+    background: #e2e8f0 !important;
+    color: #64748b !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    z-index: 1 !important;
+    transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease !important;
+    position: relative !important;
+    border: none !important;
+}
+
+.dark .step-node {
+    background: #334155 !important;
+    color: #94a3b8 !important;
+}
+
+.step-node.active {
+    background: var(--color-queens-secondary, #0a79c8) !important;
+    color: white !important;
+    box-shadow: 0 0 0 4px rgba(10, 121, 200, 0.25) !important;
+}
+
+.dark .step-node.active {
+    box-shadow: 0 0 12px rgba(10, 121, 200, 0.5) !important;
+}
+
+.step-node.completed {
+    background: var(--color-queens-secondary, #0a79c8) !important;
+    color: white !important;
+}
+
+.step-node-inner,
+.dark .step-node-inner,
+.active .step-node-inner,
+.completed .step-node-inner {
+    display: none !important;
+}
+
+.step-label {
+    position: absolute;
+    top: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+    transition: color 0.3s ease;
+}
+
+.dark .step-label {
+    color: #94a3b8;
+}
+
+.active .step-label {
+    color: #0a79c8;
+}
+
+.dark .active .step-label {
+    color: #38bdf8;
+}
+
+.completed .step-label {
+    color: #0b1121;
+}
+
+.dark .completed .step-label {
+    color: white;
+}
