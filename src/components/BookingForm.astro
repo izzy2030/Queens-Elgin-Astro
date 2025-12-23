@@ -397,16 +397,16 @@ const {
         color: white;
     }
 
-    /* Service Card Icon Styling - Premium Gold */
+    /* Service Card Icon Styling - Primary Blue */
     .service-card .service-icon-svg {
-        color: #d4af37;
+        color: #0a79c8;
         transition:
             transform 0.3s ease,
             color 0.3s ease;
     }
 
     .dark .service-card .service-icon-svg {
-        color: #d4af37;
+        color: #0a79c8;
     }
 </style>
 
@@ -435,11 +435,6 @@ const {
                             >{step1TitleHighlight}</span
                         >
                     </h5>
-
-                    <!-- Glowing Beam Effect -->
-                    <div class="relative w-full h-8 mb-4 flex justify-center">
-                        <div class="glow-beam"></div>
-                    </div>
 
                     <!-- Progress Steps -->
                     <div class="progress-steps">
@@ -1255,24 +1250,12 @@ const {
         const totalSteps = stepElements.length;
 
         const updateProgressStepper = (currentStep) => {
-            console.log(
-                "[Stepper Debug] updateProgressStepper called with step:",
-                currentStep,
-            );
-
             // Update progress bar width
             const progressPercent =
                 ((currentStep - 1) / (totalSteps - 1)) * 100;
-            console.log("[Stepper Debug] progressPercent:", progressPercent);
 
             if (progressBar) {
                 progressBar.style.width = `${progressPercent}%`;
-                console.log(
-                    "[Stepper Debug] Set progress bar width to:",
-                    progressPercent + "%",
-                );
-            } else {
-                console.log("[Stepper Debug] progressBar is null!");
             }
 
             // Update step circles
@@ -1286,7 +1269,6 @@ const {
                     stepEl.classList.add("active");
                 }
             });
-            console.log("[Stepper Debug] Updated step classes");
         };
 
         // Initialize stepper to step 1
@@ -1429,9 +1411,6 @@ const {
 
         if (nextBtn) {
             nextBtn.addEventListener("click", () => {
-                console.log(
-                    "[Stepper Debug] nextBtn clicked - transitioning to step 2",
-                );
                 step1.classList.add("hidden");
                 step2.classList.remove("hidden");
                 if (formInstruction) {
@@ -1439,20 +1418,7 @@ const {
                         formWrapper.dataset.step2desc ||
                         "Step 2 of 3 — What service does your vehicle need?";
                 }
-                try {
-                    console.log(
-                        "[Stepper Debug] About to call updateProgressStepper(2)",
-                    );
-                    updateProgressStepper(2);
-                    console.log(
-                        "[Stepper Debug] updateProgressStepper(2) completed",
-                    );
-                } catch (error) {
-                    console.error(
-                        "[Stepper Debug] ERROR calling updateProgressStepper:",
-                        error,
-                    );
-                }
+                updateProgressStepper(2);
                 smoothScrollToForm();
             });
         }
