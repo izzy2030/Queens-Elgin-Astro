@@ -1145,7 +1145,8 @@ const {
 </div>
 
 <script is:inline>
-    (function () {
+    // Listen for Astro page load (works with View Transitions)
+    document.addEventListener("astro:page-load", function initBookingForm() {
         // --- Form Props Extraction ---
         const formWrapper = document.getElementById("book-appointment-form");
         const WEBHOOK_URL = formWrapper.dataset.webhook;
@@ -1801,5 +1802,5 @@ const {
         checkStep1Completion();
         checkStep2Completion();
         checkStep3Completion();
-    })();
+    });
 </script>
