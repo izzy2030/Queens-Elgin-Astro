@@ -72,43 +72,54 @@ const {
         background-color: #334155; /* slate-700 for dark mode */
     }
     .calendar-day.selected {
-        background-color: #22d3ee;
+        background-color: #0a79c8;
         color: white;
         font-weight: bold;
     }
     .calendar-day.today {
-        background-color: rgba(37, 99, 235, 0.2);
+        color: #0a79c8;
+        background-color: rgba(10, 121, 200, 0.1);
+        font-weight: bold;
     }
     .dark .calendar-day.today {
-        background-color: rgba(37, 99, 235, 0.3);
+        background-color: rgba(10, 121, 200, 0.2);
     }
     .calendar-day.disabled {
         color: #9ca3af; /* gray-400 for light mode */
         cursor: not-allowed;
     }
+    .calendar-day.holiday {
+        text-decoration: line-through;
+        opacity: 0.6;
+    }
     .dark .calendar-day.disabled {
         color: #475569; /* slate-600 for dark mode */
     }
     .time-slot {
-        color: #374151; /* gray-700 for light mode */
-        border-color: #d1d5db; /* gray-300 for light mode */
-        background-color: #f9fafb; /* gray-50 for light mode */
+        color: #374151; /* gray-700 */
+        border: 2px solid #f3f4f6; /* gray-100 */
+        background-color: rgba(249, 250, 251, 0.5); /* gray-50/50 */
+        border-radius: 0.75rem; /* rounded-xl */
+        transition: all 0.2s ease;
     }
     .dark .time-slot {
-        color: #e2e8f0; /* slate-200 for dark mode */
-        border-color: #475569; /* slate-600 for dark mode */
-        background-color: #1e293b; /* slate-800 for dark mode */
+        color: #e2e8f0; /* slate-200 */
+        border-color: rgba(255, 255, 255, 0.05); /* white/5 */
+        background-color: rgba(255, 255, 255, 0.05); /* white/5 */
     }
     .time-slot:hover:not(.selected) {
-        background-color: #e5e7eb; /* gray-200 for light mode */
+        background-color: rgba(10, 121, 200, 0.05);
+        border-color: rgba(10, 121, 200, 0.3);
     }
     .dark .time-slot:hover:not(.selected) {
-        background-color: #334155; /* slate-700 for dark mode */
+        background-color: rgba(10, 121, 200, 0.1);
+        border-color: rgba(10, 121, 200, 0.4);
     }
     .time-slot.selected {
-        background-color: #22d3ee;
+        background-color: #0a79c8;
         color: white;
-        border-color: #22d3ee;
+        border-color: #0a79c8;
+        box-shadow: 0 4px 12px rgba(10, 121, 200, 0.2);
     }
 
     /* Calendar weekday headers */
@@ -430,15 +441,15 @@ const {
         >
             <div id="form-content">
                 <div class="text-center">
-                    <h5
-                        class="text-2xl md:text-3xl font-bold tracking-tight text-gray-900 dark:text-white"
+                    <h1
+                        class="h1 font-bold tracking-tight text-gray-900 dark:text-white"
                     >
                         {step1TitlePrefix}
                         <span
                             class="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent"
                             >{step1TitleHighlight}</span
                         >
-                    </h5>
+                    </h1>
 
                     <!-- Progress Steps -->
                     <div class="progress-steps">
@@ -788,11 +799,11 @@ const {
                     <!-- Step 2: Service Selection -->
                     <div id="form-step-2" class="form-step hidden">
                         <div class="space-y-6">
-                            <h3
-                                class="text-lg font-semibold text-gray-900 dark:text-white mb-4"
+                            <h2
+                                class="h3 font-bold text-gray-900 dark:text-white mb-4"
                             >
                                 Select a Service
-                            </h3>
+                            </h2>
                             <div
                                 class="grid grid-cols-2 sm:grid-cols-3 gap-4"
                                 id="service-grid"
@@ -1001,13 +1012,13 @@ const {
                                     for="user-comments"
                                     class="block text-sm font-medium text-gray-700 dark:text-slate-300 mb-2"
                                 >
-                                    Additional Comments (Optional)
+                                    Tell us more about the service (Optional)
                                 </label>
                                 <textarea
                                     id="user-comments"
                                     name="user_comments"
                                     rows="3"
-                                    placeholder="Tell us more about the issue..."
+                                    placeholder="Describe the service or specific needs..."
                                     class="input-field block w-full px-4 py-3 bg-gray-50 dark:bg-white/5 border border-gray-300 dark:border-slate-600 rounded-xl shadow-sm text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-300 dark:focus:ring-sky-500 focus:border-sky-300 dark:focus:border-sky-500 sm:text-sm transition-all duration-300"
                                 ></textarea>
                             </div>
@@ -1035,15 +1046,15 @@ const {
                     <div id="form-step-3" class="form-step hidden">
                         <div class="space-y-8">
                             <div>
-                                <h3
-                                    class="text-xl font-bold text-gray-900 dark:text-white mb-4"
+                                <h2
+                                    class="h3 font-bold text-gray-900 dark:text-white mb-4"
                                     data-translate-key="whenBringIn"
                                 >
                                     When can you bring it in?
-                                </h3>
+                                </h2>
                                 <div
                                     id="calendar-container"
-                                    class="bg-gray-100 dark:bg-white/5 p-6 rounded-lg shadow-lg w-full"
+                                    class="bg-gray-50/50 dark:bg-white/5 p-6 rounded-2xl border border-gray-100 dark:border-white/5 shadow-lg w-full"
                                 >
                                     <div
                                         class="flex items-center justify-between mb-6"
@@ -1516,13 +1527,25 @@ const {
             for (let i = 0; i < firstDayOfMonth; i++)
                 calendarGridBody.innerHTML += `<div></div>`;
 
+            const holidays = [
+                "12-24", // Christmas Eve
+                "12-25", // Christmas Day
+                "12-31", // New Year's Eve
+                "01-01", // New Year's Day
+            ];
+
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             for (let i = 1; i <= daysInMonth; i++) {
                 const dayDate = new Date(year, month, i);
                 let classes = "calendar-day";
                 const formattedDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
-                if (dayDate < today || dayDate.getDay() === 0)
+                const monthDay = `${String(month + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
+                const isHoliday = holidays.includes(monthDay);
+
+                if (dayDate < today || dayDate.getDay() === 0 || isHoliday) {
                     classes += " disabled";
+                    if (isHoliday) classes += " holiday";
+                }
                 if (dayDate.getTime() === today.getTime()) classes += " today";
                 if (hiddenDateInput.value === formattedDate)
                     classes += " selected";
